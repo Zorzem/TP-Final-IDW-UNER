@@ -1,0 +1,26 @@
+# Archivos de registro
+*.log
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Módulos de Node.js (en caso de usar npm o algún empaquetador)
+node_modules/
+
+# Directorios de dependencias (por ejemplo, Bower)
+bower_components/
+
+# Carpetas de distribución o compilación (si se genera un build)
+dist/
+build/
+
+# Configuraciones de editores/IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de entorno (si usaramos variables de entorno)
+.env
+.env.local
