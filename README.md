@@ -7,12 +7,12 @@
 ## Materia  
 **Introducción al Desarrollo Web**
 
-## Integrantes del grupo
-- **Giuliano Daniele**
-- **Matias Godoy**
-- **Jose Herrera**
-- **Boris Kovalow**
-- **Virginia Alejandra Ponce**
+## Integrantes del grupo (Usuario Github)
+- **Giuliano Daniele (Vitruviansky)** 
+- **Matias Godoy (Kbzgames)**
+- **Jose Herrera (joseherreraa1)**
+- **Boris Kovalow (Zorzem)**
+- **Virginia Alejandra Ponce (CodeGinny)**
 
 ---
 
