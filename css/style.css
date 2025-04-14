@@ -1,34 +1,22 @@
 *,
 *::after,
-*:before {
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+/* BODY */
+body{
+  background-color: #c2a8a8;
+  font-family: 'Arial', sans-serif;
   min-height: 100vh;
 }
 
-
-
-*{
-  margin:0;
-  padding: 0;
-  box-sizing: border-box;
-} 
-
-/* BODY */
-body{
-  background-color: #ebebeb;
-  font-family: 'Arial', sans-serif;
-}
-
-
 /* HEADER */
 header{
-  background-color: #ecc0c0;
-  color:rgb(71, 71, 196);
+  background-color: #ffffff;
+  color:rgb(174, 174, 175);
   padding: 20px;
   text-align: center;
 }
@@ -45,12 +33,10 @@ header ul{
   margin-top: 10px;
 }
 
-header li a{
+header li a {
   text-decoration: none;
-  color: rgb(255, 255, 255);
-  margin-right:10px;
-
-
+  margin-right: 10px;
+  color: rgb(100, 100, 100);
 }
 header li a:hover{
   text-decoration: none;
@@ -63,11 +49,11 @@ main{
 }
 
 section h3 {
-  color: black
+  color: black;
 }
 
 section p {
-  color: rgb(109, 108, 108)
+  color: rgb(255, 255, 255)
 }
 
 section ol{
@@ -86,7 +72,7 @@ section ol li{
 }
 /* FOOTER */
 footer{
-  background-color: #333;
+  background-color: #ca5353;
   color: aliceblue;
   text-align: center;
   padding: 10px 0;
