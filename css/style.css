@@ -13,6 +13,8 @@ body {
   min-height: 100vh;
 }
 
+/* ———————————————————————————————————————————————————————————————————————————————————— */
+
 /* HEADER */
 header {
   background-color: #ffffff;
@@ -24,7 +26,6 @@ header {
 .site-title {
   font-size: 4em;
 }
-
 
 .navbar {
   list-style: none;
@@ -44,11 +45,12 @@ header {
   color: aquamarine;
 }
 
+/* ———————————————————————————————————————————————————————————————————————————————————— */
+
 /* MAIN */
 main {
   padding: 20px;
 }
-
 
 .hero {
   text-align: center;
@@ -64,9 +66,9 @@ main {
   color: rgb(255, 255, 255)
 }
 
-section ol {
+/* Alguien está usando esto? No tiene función, sino lo eliminamos */
+/* section ol {
   display: grid;
-  /* margin-left: 20px;  */
   list-style: none;
 }
 
@@ -74,10 +76,10 @@ section ol li {
   border-radius: 10px;
   padding: 10px;
   margin: 5px 0;
-  background-color: rgb(106, 154, 196);
+  background-color: red;
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* FOOTER */
 footer {
@@ -85,7 +87,6 @@ footer {
   color: aliceblue;
   text-align: center;
   padding: 10px 0;
-
 }
 
 
