@@ -7,86 +7,90 @@
 }
 
 /* BODY */
-body{
+body {
   background-color: #c2a8a8;
   font-family: 'Arial', sans-serif;
   min-height: 100vh;
 }
 
 /* HEADER */
-header{
+header {
   background-color: #ffffff;
-  color:rgb(174, 174, 175);
+  color: rgb(174, 174, 175);
   padding: 20px;
   text-align: center;
 }
 
-header h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
+.site-title {
+  font-size: 4em;
 }
 
-header ul{
+
+.navbar {
   list-style: none;
   justify-content: center;
   display: flex;
   margin-top: 10px;
 }
 
-header li a {
+.navbar li a {
   text-decoration: none;
   margin-right: 10px;
   color: rgb(100, 100, 100);
 }
-header li a:hover{
+
+.navbar li a:hover {
   text-decoration: none;
   color: aquamarine;
 }
 
 /* MAIN */
-main{
+main {
   padding: 20px;
 }
 
-section h3 {
+.hero-title {
   color: black;
 }
 
-section p {
+.hero-info {
   color: rgb(255, 255, 255)
 }
 
-section ol{
+section ol {
   display: grid;
-  /* margin-left: 20px;  */ 
-  list-style: none;  
+  /* margin-left: 20px;  */
+  list-style: none;
 }
 
-section ol li{
-  border-radius:10px;
+section ol li {
+  border-radius: 10px;
   padding: 10px;
   margin: 5px 0;
-  background-color:rgb(106, 154, 196);
+  background-color: rgb(106, 154, 196);
   display: flex;
   flex-direction: column;
 }
+
 /* FOOTER */
-footer{
+footer {
   background-color: #ca5353;
   color: aliceblue;
   text-align: center;
   padding: 10px 0;
-  
+
 }
 
 
 .contenedor-salones {
-  text-align: center; /* para alinear las tarjetas */
+  text-align: center;
+  /* para alinear las tarjetas */
 }
 
 .tarjeta {
   display: inline-block;
-  width: 30%; /* 3 tarjetas por fila */
+  width: 30%;
+  /* 3 tarjetas por fila */
   margin: 1%;
   vertical-align: top;
   background-color: #f9f9f9;
