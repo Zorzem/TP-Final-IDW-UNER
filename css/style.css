@@ -77,21 +77,6 @@ main {
   font-size: 1.4em;
 }
 
-/* Alguien está usando esto? No tiene función, sino lo eliminamos */
-/* section ol {
-  display: grid;
-  list-style: none;
-}
-
-section ol li {
-  border-radius: 10px;
-  padding: 10px;
-  margin: 5px 0;
-  background-color: red;
-  display: flex;
-  flex-direction: column;
-} */
-
 /* ———————————————————————————————————————————————————————————————————————————————————— */
 
 .contenedor-salones {
@@ -182,3 +167,23 @@ button:hover {
   background-color: #0056b3;
 }
 /* ———————————————————————————————————————————————————————————————————————————————————— */
+
+
+
+/* ———————————————————————————————————————————————————————————————————————————————————— */
+
+.contenido-institucional {
+  max-width: 900px;      
+  margin: 0 auto;        
+  text-align: center;   
+  padding: 5px;
+}
+
+.contenido-institucional img {
+  max-width: 100%;       
+  width: 900px;          
+  height: auto;         
+  display: block;
+  margin: 0 auto 20px auto;  
+  border: 2px solid #000000;
+}
