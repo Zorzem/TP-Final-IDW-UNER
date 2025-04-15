@@ -78,3 +78,36 @@ footer{
   padding: 10px 0;
   
 }
+
+
+.contenedor-salones {
+  text-align: center; /* para alinear las tarjetas */
+}
+
+.tarjeta {
+  display: inline-block;
+  width: 30%; /* 3 tarjetas por fila */
+  margin: 1%;
+  vertical-align: top;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.tarjeta img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.tarjeta h4 {
+  margin: 10px 0 5px 0;
+  font-size: 1.2em;
+}
+
+.tarjeta p {
+  font-size: 0.9em;
+  color: #555;
+}
