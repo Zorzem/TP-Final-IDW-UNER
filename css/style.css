@@ -69,11 +69,12 @@ main {
 
 .hero-title {
   color: black;
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .hero-info {
   color: var(--dark-color);
+  font-size: 1.4em;
 }
 
 /* Alguien está usando esto? No tiene función, sino lo eliminamos */
@@ -132,4 +133,5 @@ footer {
   color: aliceblue;
   text-align: center;
   padding: 10px 0;
+  margin-top: 3em;
 }
