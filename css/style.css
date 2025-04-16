@@ -554,3 +554,58 @@ input, textarea {
 .newsletter-input-group button:hover {
   background-color: #2fd9b0;
 }
+
+/* ---------- NAV MENU RESPONSIVE MOBILE ---------- */
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Checkbox hidden */
+.menu-toggle-checkbox {
+  display: none;
+}
+
+/* Label (ícono hamburguesa) */
+.menu-toggle-label {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-toggle-label {
+    display: block;
+    color: white;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: #fe56b0;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Mostrar menú si el checkbox está tildado */
+  .menu-toggle-checkbox:checked + .menu-toggle-label + .nav-menu {
+    display: block;
+  }
+}
