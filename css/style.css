@@ -609,3 +609,28 @@ input, textarea {
     display: block;
   }
 }
+
+/* ---------- INFO INSTITUCIONAL RESPONSIVE MOBILE ---------- */
+@media (max-width: 768px) {
+  .info-item-institucional {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-item-institucional img {
+    width: 100%;
+    height: auto;
+  }
+
+  .info-item-institucional div {
+    max-width: 100%;
+  }
+
+  .info-item-institucional h2 {
+    font-size: 1.4rem;
+  }
+
+  .info-item-institucional p {
+    font-size: 0.95rem;
+  }
+}
