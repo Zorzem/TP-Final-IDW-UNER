@@ -4,25 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contacto | Planeta Fiesta</title>
-  <link rel="stylesheet" href="../css/contacto.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <header class="navbar">
-    <div class="navbar-content">
-      <img src="../img/logo.png" alt="Planeta Fiesta" class="logo" />
-      <nav>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="catalogo.html">Catálogo</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="institucional.html" class="active">Institucional</a></li>
-        </ul>
-      </nav>
+    <div class="logo">
+      <img src="../img/logo.png" alt="Logo Planeta Fiesta" />
     </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="institucional.html" class="active">Institucional</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="../index.html#salones">Catálogo</a></li>
+      </ul>
+    </nav>
   </header>
-  
+
+
+  <!-- Formulario -->
   <main class="contacto-container">
     <div class="form-box">
       <h2>📬 ¡Escribinos!</h2>
@@ -48,10 +50,34 @@
     </div>
   </main>
 
-   <!-- Footer -->
-   <footer class="footer">
-    <p>&copy; 2025 Planeta Fiesta - Todos los derechos reservados.</p>
-    <p>Diseñado con 💜 para crear momentos inolvidables.</p>
+   <!-- FOOTER COMPARTIDO CON INDEX -->
+   <footer class="footer-mejorado">
+    <div class="footer-contenido">
+      <p>© 2025 Planeta Fiesta - Todos los derechos reservados.</p>
+
+      <div class="redes-sociales">
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+        </a>
+        <a href="mailto:planeta.fiesta@gmail.com" aria-label="Gmail">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail">
+        </a>
+        <a href="https://wa.me/549123456789" target="_blank" aria-label="WhatsApp">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+        </a>
+      </div>
+
+      <form class="newsletter-form">
+        <label for="email">¡Suscribite a nuestro newsletter!</label>
+        <div class="newsletter-input-group">
+          <input type="email" id="email" placeholder="Tu correo electrónico" required>
+          <button type="submit">Suscribirse</button>
+        </div>
+      </form>
+    </div>
   </footer>
 
 </body>

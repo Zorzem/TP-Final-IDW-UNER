@@ -409,6 +409,78 @@ input, textarea {
   font-weight: bold;
 }
 
+/*--------CONTACTO-----------*/
+
+/* Formulario */
+.contacto-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background-color: #fff8f0;
+}
+
+.form-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.form-box h2 {
+  font-size: 2rem;
+  color: #ba68c8;
+  margin-bottom: 1rem;
+}
+
+.form-box p {
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  transition: border-color 0.3s;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #33FFCC;
+  outline: none;
+}
+
+.btn-enviar {
+  background-color: #14c0f0;
+  color: white;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-enviar:hover {
+  background-color: #e055b9;
+}
 
 /* ---------- FOOTER ---------- */
 .footer-mejorado {
