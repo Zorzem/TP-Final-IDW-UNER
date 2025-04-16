@@ -1,189 +1,556 @@
-:root {
-  --light-color: #f7f6f6;
-  --dark-color: #1b1b1b;
-  --primary-color: #b5400a;
-  --secondary-color: #d7d5d5;
-}
-
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* ---------- ESTILOS GENERALES ---------- */
 body {
-  background-color: var(--secondary-color);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  min-height: 100vh;
+  margin: 0; /* Elimina márgenes por defecto */
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente divertida */
+  background-color: #fff8f0; /* Fondo color crema claro */
+  color: #333; /* Color de texto principal */
 }
 
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-
-header {
-  background-color: var(--light-color);
-  color: rgb(174, 174, 175);
-  padding: 20px;
-  text-align: center;
-}
-
-.site-title {
-  font-size: 4em;
-  color: var(--primary-color);
-}
-
-.site-subtitle {
-  color: var(--primary-color);
-}
-
+/* ---------- NAVBAR ---------- */
 .navbar {
-  list-style: none;
-  justify-content: center;
-  display: flex;
+  background-color: #fe56b0; /* Fucsia brillante */
+  padding: 15px; /* Espaciado interno */
+  display: flex; /* Layout flexible */
+  align-items: center; /* Alinea verticalmente al centro */
+  justify-content: space-between; /* Espacia logo y menú */
+}
+
+.navbar-content {
+  display: flex; /* Layout flexible para contenido */
+  align-items: center; /* Alineación vertical */
+  gap: 20px; /* Espacio entre elementos */
+}
+
+.logo img {
+  height: 70px; /* Altura del logo */
+  width: auto; /* Mantiene proporción */
+}
+
+.navbar nav ul {
+  list-style: none; /* Quita viñetas */
+  display: flex; /* Elementos en fila */
+  gap: 15px; /* Espacio entre ítems */
+  padding: 0;
+  margin: 0;
+}
+
+.navbar nav a {
+  color: white; /* Color del texto del menú */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: bold; /* Texto en negrita */
+}
+
+/* ---------- BANNER ---------- */
+.banner img {
+  width: 100%; /* Ocupa todo el ancho */
+  height: auto; /* Ajusta altura automáticamente */
+  display: block;
+  border-bottom: 4px solid #ffee58; /* Línea amarilla abajo */
+}
+
+/* ---------- SECCIÓN INFO ---------- */
+.info {
+  display: flex; /* Distribuye ítems en fila */
+  justify-content: space-around; /* Espacio uniforme */
+  background-color: #81d4fa; /* Azul claro */
+  padding: 20px;
+  text-align: center;
+}
+
+.info-item img {
+  width: 60px;
+  height: 60px;
+}
+
+.info-item p {
   margin-top: 10px;
+  font-weight: bold;
 }
 
-.navbar li a {
-  text-decoration: none;
-  margin-right: 10px;
-  color: var(--dark-color);
+.info h2 {
+  color: #ba68c8; /* Violeta */
 }
 
-.navbar li a:hover {
-  text-decoration: none;
-  color: var(--primary-color);
+.info span {
+  color: #ff66cc; /* Rosa fuerte */
 }
 
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-
-/* MAIN */
-main {
-  padding: 20px;
+.info h3 {
+  color: #81d4fa; /* Azul claro */
+  margin-top: 20px;
 }
 
-.hero {
-  text-align: center;
-  padding-block: 2em;
+.info ul {
+  list-style: none;
+  padding: 0;
 }
 
-.hero-title {
-  color: black;
-  font-size: 3em;
+.info li {
+  margin-bottom: 8px;
 }
 
-.hero-info {
-  color: var(--dark-color);
-  font-size: 1.4em;
-}
-
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-
-.contenedor-salones {
+/* ---------- SECCIÓN SALONES ---------- */
+.salones {
+  padding: 40px 20px;
+  background-color: #fe56b0; /* Fucsia */
   text-align: center;
 }
 
-.tarjeta {
-  display: inline-block;
-  width: 30%;
-  margin: 1%;
-  vertical-align: top;
-  background-color: var(--light-color);
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 15px;
-  box-sizing: border-box;
+.salones h2 {
+  color: white; /* Texto blanco */
+  margin-bottom: 30px;
 }
 
-.tarjeta img {
+.cards-grid {
+  display: grid; /* Layout de grilla */
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+  gap: 20px; /* Espacio entre tarjetas */
+}
+
+.card {
+  background-color: #fff0f5; /* Rosa claro */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra sutil */
+  overflow: hidden;
+}
+
+.card img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 180px;
+  object-fit: cover; /* Cubre sin deformar */
 }
 
-.tarjeta h4 {
-  margin: 10px 0 5px 0;
-  font-size: 1.2em;
+.card-body {
+  padding: 15px;
+  text-align: left;
 }
 
-.tarjeta p {
-  font-size: 0.9em;
-  color: #555;
-}
-
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-
-footer {
-  background-color: var(--primary-color);
-  color: aliceblue;
+/* ---------- MÁS INFO ---------- */
+.mas-info {
+  background-color: #33FFCC; /* Turquesa brillante */
+  padding: 40px 20px;
   text-align: center;
-  padding: 10px 0;
-  margin-top: 3em;
 }
 
-
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-.formulario {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.mas-info h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-h2 {
+/* ---------- RESEÑAS ---------- */
+.resenas {
+  padding: 40px 20px;
+  background-color: #ffee58; /* Amarillo suave */
   text-align: center;
+}
+
+.resena img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.resena blockquote {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ---------- FORMULARIO DE CONTACTO ---------- */
+.contacto-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.form-box {
+  background-color: #fff0f5; /* Fondo rosa claro */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-box h2 {
+  color: #ba68c8; /* Violeta */
+}
+
+.form-group {
   margin-bottom: 20px;
 }
 
 label {
   display: block;
-  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-input,
-textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  margin-top: 15px;
+input, textarea {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
-  border: none;
-  color: white;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}
+
+.btn-enviar {
+  background-color: #33FFCC; /* Turquesa */
+  color: black;
   font-weight: bold;
-  border-radius: 4px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-
-
-
-/* ———————————————————————————————————————————————————————————————————————————————————— */
-
-.contenido-institucional {
-  max-width: 900px;      
-  margin: 0 auto;        
-  text-align: center;   
-  padding: 5px;
+/* ---------- GALERÍA DE IMÁGENES ---------- */
+.galeria-top,
+.galeria-bottom {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin: 20px 0;
 }
 
-.contenido-institucional img {
-  max-width: 100%;       
-  width: 900px;          
-  height: auto;         
+.galeria-top img,
+.galeria-bottom img {
+  width: 30%;
+  border-radius: 20px;
+}
+
+
+/* === ESTILOS PARA INSTITUCIONAL === */
+.info-institucional {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilo para cada item en la sección de información institucional */
+.info-item-institucional {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Imagen dentro del item */
+.info-item-institucional img {
+  width: 450px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el contenido del texto dentro de cada item */
+.info-item-institucional div {
+  flex: 1;
+  max-width: 500px;
+}
+
+.info-item-institucional h2 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.info-item-institucional p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.info-item-institucional ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-item-institucional ul li {
+  font-size: 1rem;
+  color: #333;
+  padding-left: 20px;
+  position: relative;
+}
+
+.info-item-institucional ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #ff8a65; /* color de los iconos de las listas */
+  font-size: 1.5rem;
+}
+
+/* Efecto hover para hacer la sección más interactiva */
+.info-item-institucional:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Footer mejorado compartido con index */
+.footer-mejorado {
+  background-color: #81d4fa;
+  color: #333;
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 4px solid #33FFCC;
+}
+
+.footer-contenido {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-mejorado .redes-sociales {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-mejorado .redes-sociales img {
+  width: 30px;
+  height: 30px;
+  filter: invert(1); /* Para que los íconos se vean blancos o brillantes */
+  transition: transform 0.2s ease;
+}
+
+.footer-mejorado .redes-sociales img:hover {
+  transform: scale(1.2);
+}
+
+/* Formulario de newsletter */
+.newsletter-form {
+  margin-top: 20px;
+}
+
+.newsletter-form label {
   display: block;
-  margin: 0 auto 20px auto;  
-  border: 2px solid #000000;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.newsletter-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsletter-input-group input[type="email"] {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  width: 250px;
+}
+
+.newsletter-input-group button {
+  padding: 10px 20px;
+  background-color: #33FFCC;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.newsletter-input-group button:hover {
+  background-color: #28ccaa;
+}
+
+
+/* === FOOTER MEJORADO === */
+.footer {
+  background-color: #ba68c8;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 5px solid #ffee58;
+}
+
+.footer .social-icons {
+  margin-bottom: 15px;
+}
+
+.footer .social-icons a {
+  font-size: 1.5rem;
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer .newsletter-form {
+  margin-bottom: 15px;
+}
+
+.footer input[type="email"] {
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  margin-right: 10px;
+  font-family: inherit;
+}
+
+.footer button {
+  background-color: #33FFCC;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/*--------CONTACTO-----------*/
+
+/* Formulario */
+.contacto-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background-color: #fff8f0;
+}
+
+.form-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.form-box h2 {
+  font-size: 2rem;
+  color: #ba68c8;
+  margin-bottom: 1rem;
+}
+
+.form-box p {
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  transition: border-color 0.3s;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #33FFCC;
+  outline: none;
+}
+
+.btn-enviar {
+  background-color: #14c0f0;
+  color: white;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-enviar:hover {
+  background-color: #e055b9;
+}
+
+/* ---------- FOOTER ---------- */
+.footer-mejorado {
+  background-color: #ba68c8;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.footer-contenido {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.redes-sociales {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.redes-sociales a img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease-in-out;
+  filter: invert(1); /* Hace que los íconos SVG se vean blancos */
+}
+
+.redes-sociales a:hover img {
+  transform: scale(1.2);
+}
+
+.newsletter-form {
+  margin-top: 20px;
+}
+
+.newsletter-form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.newsletter-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsletter-input-group input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 250px;
+  max-width: 100%;
+}
+
+.newsletter-input-group button {
+  background-color: #33FFCC;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.newsletter-input-group button:hover {
+  background-color: #2fd9b0;
 }

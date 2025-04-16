@@ -1,47 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDW S.A</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="shortcut icon" href="#" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto | Planeta Fiesta</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
-
 <body>
-    <!-- ENCABEZADO -->
-    <header>
-        <h1 class="site-title">IDW</h1>
-        <span class="site-subtitle">Reserva de salones para eventos</span>
-        
-        <ul class="navbar">
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="institucional.html">Institucional</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-    </header>
 
-    <main>
-        <div class="formulario">
-            <h2>Contacto</h2>
-            <form>
-              <label for="nombre">Nombre:</label>
-              <input type="text" id="nombre" name="nombre"/>
-        
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email"/>
-        
-              <label for="mensaje">Mensaje:</label>
-              <textarea id="mensaje" name="mensaje" rows="4"></textarea>
-        
-              <button type="submit">Enviar</button>
-            </form>
-          </div>
-    </main>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../img/logo.png" alt="Logo Planeta Fiesta" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="institucional.html" class="active">Institucional</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="../index.html#salones">Catálogo</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <footer>
-        <p>© 2025 IDW Sociedad Anonima, Inc. Todos los derechos reservados.</p>
-    </footer>
-    
+
+  <!-- Formulario -->
+  <main class="contacto-container">
+    <div class="form-box">
+      <h2>📬 ¡Escribinos!</h2>
+      <p>¿Tenés dudas, ideas o querés reservar? Completá el formulario y te respondemos rapidito 🚀</p>
+      <form>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribí tu mensaje acá..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar">🎈 Enviar mensaje</button>
+      </form>
+    </div>
+  </main>
+
+   <!-- FOOTER COMPARTIDO CON INDEX -->
+   <footer class="footer-mejorado">
+    <div class="footer-contenido">
+      <p>© 2025 Planeta Fiesta - Todos los derechos reservados.</p>
+
+      <div class="redes-sociales">
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+        </a>
+        <a href="mailto:planeta.fiesta@gmail.com" aria-label="Gmail">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail">
+        </a>
+        <a href="https://wa.me/549123456789" target="_blank" aria-label="WhatsApp">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+        </a>
+      </div>
+
+      <form class="newsletter-form">
+        <label for="email">¡Suscribite a nuestro newsletter!</label>
+        <div class="newsletter-input-group">
+          <input type="email" id="email" placeholder="Tu correo electrónico" required>
+          <button type="submit">Suscribirse</button>
+        </div>
+      </form>
+    </div>
+  </footer>
+
 </body>
 </html>
