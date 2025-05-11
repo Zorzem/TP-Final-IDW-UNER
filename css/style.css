@@ -294,6 +294,16 @@ input, textarea {
 }
 
 
+/* Control de tamaño de imagenes en carrusel clientes felices*/
+.carousel-img {
+  width: 80px; /* Ancho fijo para imágenes pequeñas */
+  height: 80px; /* Alto fijo para imágenes pequeñas */
+  object-fit: cover; /* Ajusta la imagen, recortando si es necesario */
+  object-position: center; /* Centra la imagen */
+  border-radius: 50%; /* Imágenes circulares */
+  margin-bottom: 1rem; /* Espacio entre imagen y texto */
+}
+
 
 /* Footer mejorado compartido con index */
 .footer-mejorado {
