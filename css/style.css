@@ -294,6 +294,21 @@ input, textarea {
 }
 
 
+/* Control de tamaño de imagenes en carrusel clientes felices*/
+.carousel-img {
+  width: 100px; /* Ancho fijo para imágenes pequeñas */
+  height: 100px; /* Alto fijo para imágenes pequeñas */
+  object-fit: cover; /* Ajusta la imagen, recortando si es necesario */
+  object-position: center; /* Centra la imagen */
+  border-radius: 50%; /* Imágenes circulares */
+  margin-bottom: 1rem; /* Espacio entre imagen y texto */
+}
+
+/* Efecto hover para hacer la sección más interactiva */
+.info-item-tres:hover {
+  transform: translateY(-5px) scale(1.05); /* Eleva y aumenta un 5% */
+  box-shadow: 0 6px 12px #81d4fa;
+}
 
 /* Footer mejorado compartido con index */
 .footer-mejorado {
