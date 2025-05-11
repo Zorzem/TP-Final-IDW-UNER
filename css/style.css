@@ -6,38 +6,37 @@ body {
   color: #333; /* Color de texto principal */
 }
 
-/* ---------- NAVBAR ---------- */
-.navbar {
-  background-color: #fe56b0; /* Fucsia brillante */
-  padding: 15px; /* Espaciado interno */
-  display: flex; /* Layout flexible */
-  align-items: center; /* Alinea verticalmente al centro */
-  justify-content: space-between; /* Espacia logo y menú */
+/* ---------- NAVBAR PERSONALIZADA ---------- */
+.custom-navbar {
+  background-color: #fe56b0;
+  padding: 15px;
 }
 
 .navbar-content {
-  display: flex; /* Layout flexible para contenido */
-  align-items: center; /* Alineación vertical */
-  gap: 20px; /* Espacio entre elementos */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .logo img {
-  height: 70px; /* Altura del logo */
-  width: auto; /* Mantiene proporción */
+  height: 70px;
+  width: auto;
 }
 
-.navbar nav ul {
-  list-style: none; /* Quita viñetas */
-  display: flex; /* Elementos en fila */
-  gap: 15px; /* Espacio entre ítems */
-  padding: 0;
-  margin: 0;
+.navbar-nav {
+  display: flex;
+  gap: 15px;
 }
 
-.navbar nav a {
-  color: white; /* Color del texto del menú */
-  text-decoration: none; /* Sin subrayado */
-  font-weight: bold; /* Texto en negrita */
+.nav-link {
+  color: white !important;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
 }
 
 /* ---------- BANNER ---------- */
