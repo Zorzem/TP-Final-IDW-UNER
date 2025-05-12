@@ -345,38 +345,37 @@ textarea {
   box-shadow: 0 6px 12px #81d4fa;
 }
 
+/* Regla duplicada, eliminar si no se usa */
 /* Footer mejorado compartido con index */
-.footer-mejorado {
+/* .footer-mejorado {
   background-color: #81d4fa;
   color: #333;
   text-align: center;
   padding: 30px 20px;
   border-top: 4px solid #33FFCC;
-}
+} */
 
 .footer-contenido {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.footer-mejorado .redes-sociales {
+/* Regla duplicada, eliminar si no se usa */
+/* .footer-mejorado .redes-sociales {
   margin: 15px 0;
   display: flex;
   justify-content: center;
   gap: 15px;
-}
+} */
 
-.footer-mejorado .redes-sociales img {
+/* Regla duplicada, eliminar si no se usa */
+/* .footer-mejorado .redes-sociales img {
   width: 30px;
   height: 30px;
   filter: invert(1);
-  /* Para que los íconos se vean blancos o brillantes */
   transition: transform 0.2s ease;
-}
+} */
 
-.footer-mejorado .redes-sociales img:hover {
-  transform: scale(1.2);
-}
 
 /* Formulario de newsletter */
 .newsletter-form {
@@ -460,7 +459,7 @@ textarea {
 }
 
 .copyright {
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-bottom: 0rem;
   opacity: 0.5;
 }
@@ -542,10 +541,8 @@ textarea {
 .footer-mejorado {
   background-color: #ba68c8;
   color: white;
-  padding: 40px 20px;
+  padding-block: 40px 20px;
   text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
 }
 
 .footer-contenido {
@@ -554,7 +551,7 @@ textarea {
 }
 
 .redes-sociales {
-  margin: 20px 0;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -565,10 +562,9 @@ textarea {
   height: 30px;
   transition: transform 0.2s ease-in-out;
   filter: invert(1);
-  /* Hace que los íconos SVG se vean blancos */
 }
 
-.redes-sociales a:hover img {
+.redes-sociales img:hover {
   transform: scale(1.2);
 }
 
