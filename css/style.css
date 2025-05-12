@@ -551,10 +551,10 @@ textarea {
 }
 
 .redes-sociales {
-  margin-top: 40px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 18px;
 }
 
 .redes-sociales a img {
@@ -572,10 +572,8 @@ textarea {
   margin-top: 20px;
 }
 
-.newsletter-form label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 10px;
+.newsletter-form h3 {
+  margin-bottom: 20px;
 }
 
 .newsletter-input-group {
