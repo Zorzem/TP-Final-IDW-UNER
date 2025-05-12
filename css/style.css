@@ -459,6 +459,12 @@ textarea {
   font-weight: bold;
 }
 
+.copyright {
+  margin-top: 5rem;
+  margin-bottom: 0rem;
+  opacity: 0.5;
+}
+
 /*--------CONTACTO-----------*/
 
 /* Formulario */
