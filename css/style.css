@@ -45,12 +45,8 @@ body {
 /* ---------- BANNER ---------- */
 .banner img {
   width: 100%;
-  /* Ocupa todo el ancho */
   height: auto;
-  /* Ajusta altura automáticamente */
   display: block;
-  border-bottom: 4px solid #ffee58;
-  /* Línea amarilla abajo */
 }
 
 /* ---------- SECCIÓN INFO ---------- */
