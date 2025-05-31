@@ -60,6 +60,10 @@
   transition: background 300ms;
 }
 
+.current-page{
+  font-weight: 700 !important;
+}
+
 .fw-bold {
   /* color: var(--accent-1-color); */
 }
