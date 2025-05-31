@@ -1,17 +1,34 @@
-/* ---------- ESTILOS GENERALES ---------- */
+:root {
+  --main-bg-color: #fff8f0;
+  --main-text-color: #333;
+  --accent-1-color: #ff528c;
+  --accent-2-color: #9adfff;
+  --accent-3-color: #25ffc9;
+  --accent-4-color: #ffee58;
+  --accent-5-color: #d41ff4;
+  --navbar-text-color: #fff;
+  --white-text-color: #fff;
+}
+
+/* CSS reset */
+*,
+*::after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  /* Fuente divertida */
-  background-color: #fff8f0;
-  /* Fondo color crema claro */
-  color: #333;
-  /* Color de texto principal */
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }
 
 /* ---------- NAVBAR PERSONALIZADA ---------- */
 .custom-navbar {
-  background-color: #fe56b0;
+  background-color: var(--accent-1-color);
   padding: 15px;
 }
 
@@ -33,13 +50,29 @@ body {
 }
 
 .nav-link {
-  color: white !important;
+  color: var(--navbar-text-color) !important;
   text-decoration: none;
   font-weight: bold;
 }
 
 .nav-link:hover {
   text-decoration: underline;
+}
+
+.admin{
+  color: white !important;
+  /* background-color: white !important; */
+  border: 1px solid white !important;
+  transition: background 300ms !important;
+}
+
+.admin:hover{
+  background-color: var(--accent-2-color) !important;
+  transition: background 300ms;
+}
+
+.fw-bold{
+  /* color: var(--accent-1-color); */
 }
 
 /* ---------- BANNER ---------- */
@@ -52,18 +85,15 @@ body {
 /* ---------- SECCIÓN INFO ---------- */
 .info {
   display: flex;
-  /* Distribuye ítems en fila */
   justify-content: space-around;
-  /* Espacio uniforme */
-  background-color: #81d4fa;
-  /* Azul claro */
-  padding: 20px;
+  background-color: var(--accent-2-color);
+  padding: 40px;
   text-align: center;
 }
 
 .info-item img {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  aspect-ratio: 1;
 }
 
 .info-item p {
@@ -71,83 +101,69 @@ body {
   font-weight: bold;
 }
 
-.info h2 {
+/* Las siguientes reglas no se usan */
+/* .info h2 {
   color: #ba68c8;
-  /* Violeta */
-}
+} */
 
-.info span {
+/* .info span {
   color: #ff66cc;
-  /* Rosa fuerte */
-}
+} */
 
-.info h3 {
-  color: #81d4fa;
-  /* Azul claro */
+/* .info h3 {
+  color: var(--accent-2-color);
   margin-top: 20px;
-}
+} */
 
-.info ul {
+/* .info ul {
   list-style: none;
   padding: 0;
-}
+} */
 
-.info li {
+/* .info li {
   margin-bottom: 8px;
-}
+} */
 
 /* ---------- SECCIÓN SALONES ---------- */
 .salones {
   padding: 40px 20px;
-  background-color: #fe56b0;
-  /* Fucsia */
+  background-color: var(--accent-1-color);
   text-align: center;
 }
 
 .salones h2 {
   color: white;
-  /* Texto blanco */
   margin-bottom: 30px;
 }
 
 .servicios {
   padding: 40px 20px;
-  background-color: #fe56b0;
-  /* Fucsia */
+  background-color: var(--accent-1-color);
   text-align: center;
 }
 
 .servicios h2 {
   color: white;
-  /* Texto blanco */
   margin-bottom: 30px;
 }
 
 
 .cards-grid {
   display: grid;
-  /* Layout de grilla */
   grid-template-columns: repeat(3, 1fr);
-  /* 3 columnas iguales */
   gap: 20px;
-  /* Espacio entre tarjetas */
 }
 
 .card {
-  background-color: #fff0f5;
-  /* Rosa claro */
-  border-radius: 20px;
-  /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Sombra sutil */
-  overflow: hidden;
+  /* background-color: #fff !important; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* overflow: hidden; */
 }
 
 .card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  /* Cubre sin deformar */
 }
 
 .card-body {
@@ -157,8 +173,7 @@ body {
 
 /* ---------- MÁS INFO ---------- */
 .mas-info {
-  background-color: #33FFCC;
-  /* Turquesa brillante */
+  background-color: var(--accent-3-color);
   padding: 40px 20px;
   text-align: center;
 }
@@ -171,19 +186,21 @@ body {
 /* ---------- RESEÑAS ---------- */
 .resenas {
   padding: 40px 20px;
-  background-color: #ffee58;
-  /* Amarillo suave */
+  background-color: var(--accent-4-color);
   text-align: center;
 }
 
 .resena img {
-  width: 100px;
+  margin-top: 1rem;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
 }
 
 .resena blockquote {
   margin-top: 10px;
   font-style: italic;
+  font-size: 1.1em;
 }
 
 /* ---------- FORMULARIO DE CONTACTO ---------- */
@@ -195,7 +212,6 @@ body {
 
 .form-box {
   background-color: #fff0f5;
-  /* Fondo rosa claro */
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -205,7 +221,6 @@ body {
 
 .form-box h2 {
   color: #ba68c8;
-  /* Violeta */
 }
 
 .form-group {
@@ -228,8 +243,7 @@ textarea {
 }
 
 .btn-enviar {
-  background-color: #33FFCC;
-  /* Turquesa */
+  background-color: var(--accent-3-color);
   color: black;
   font-weight: bold;
   border: none;
@@ -325,7 +339,6 @@ textarea {
   font-size: 1.5rem;
 }
 
-/* Efecto hover para hacer la sección más interactiva */
 .info-item-institucional:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -335,59 +348,24 @@ textarea {
 /* Control de tamaño de imagenes en carrusel clientes felices*/
 .carousel-img {
   width: 100px;
-  /* Ancho fijo para imágenes pequeñas */
   height: 100px;
-  /* Alto fijo para imágenes pequeñas */
   object-fit: cover;
-  /* Ajusta la imagen, recortando si es necesario */
   object-position: center;
-  /* Centra la imagen */
   border-radius: 50%;
-  /* Imágenes circulares */
   margin-bottom: 1rem;
-  /* Espacio entre imagen y texto */
 }
 
-/* Efecto hover para hacer la sección más interactiva */
 .info-item-tres:hover {
   transform: translateY(-5px) scale(1.05);
   /* Eleva y aumenta un 5% */
-  box-shadow: 0 6px 12px #81d4fa;
+  box-shadow: 0 6px 12px var(--accent-2-color);
 }
-
-/* Regla duplicada, eliminar si no se usa */
-/* Footer mejorado compartido con index */
-/* .footer-mejorado {
-  background-color: #81d4fa;
-  color: #333;
-  text-align: center;
-  padding: 30px 20px;
-  border-top: 4px solid #33FFCC;
-} */
 
 .footer-contenido {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Regla duplicada, eliminar si no se usa */
-/* .footer-mejorado .redes-sociales {
-  margin: 15px 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-} */
-
-/* Regla duplicada, eliminar si no se usa */
-/* .footer-mejorado .redes-sociales img {
-  width: 30px;
-  height: 30px;
-  filter: invert(1);
-  transition: transform 0.2s ease;
-} */
-
-
-/* Formulario de newsletter */
 .newsletter-form {
   margin-top: 20px;
 }
@@ -414,7 +392,7 @@ textarea {
 
 .newsletter-input-group button {
   padding: 10px 20px;
-  background-color: #33FFCC;
+  background-color: var(--accent-3-color);
   border: none;
   border-radius: 10px;
   font-weight: bold;
@@ -422,12 +400,82 @@ textarea {
   transition: background-color 0.3s;
 }
 
-.newsletter-input-group button:hover {
-  background-color: #28ccaa;
+/*--------CONTACTO-----------*/
+
+/* Formulario */
+.contacto-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background-color: #fff8f0;
 }
 
+.form-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
 
-/* === FOOTER MEJORADO === */
+.form-box h2 {
+  font-size: 2rem;
+  color: var(--accent-1-color);
+  margin-bottom: 1rem;
+}
+
+.form-box p {
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  transition: border-color 0.3s;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-1-color);
+  outline: none;
+}
+
+.btn-enviar {
+  background-color: var(--accent-1-color);
+  color: white;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-enviar:hover {
+  background-color: var(--accent-2-color);
+}
+
+/* ---------- FOOTER ---------- */
+/* Reglas que no se usan... */
+/* 
 .footer {
   background-color: #ba68c8;
   color: white;
@@ -460,96 +508,16 @@ textarea {
 }
 
 .footer button {
-  background-color: #33FFCC;
+  background-color: var(--accent-3-color);
   border: none;
   padding: 8px 16px;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-}
+} */
 
-.copyright {
-  margin-top: 2rem;
-  margin-bottom: 0rem;
-  opacity: 0.5;
-}
-
-/*--------CONTACTO-----------*/
-
-/* Formulario */
-.contacto-container {
-  display: flex;
-  justify-content: center;
-  padding: 3rem 1rem;
-  background-color: #fff8f0;
-}
-
-.form-box {
-  background-color: white;
-  border-radius: 20px;
-  padding: 2.5rem;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
-
-.form-box h2 {
-  font-size: 2rem;
-  color: #ba68c8;
-  margin-bottom: 1rem;
-}
-
-.form-box p {
-  margin-bottom: 2rem;
-  color: #555;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  transition: border-color 0.3s;
-  font-size: 1rem;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #33FFCC;
-  outline: none;
-}
-
-.btn-enviar {
-  background-color: #14c0f0;
-  color: white;
-  border: none;
-  padding: 0.9rem 1.8rem;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-enviar:hover {
-  background-color: #e055b9;
-}
-
-/* ---------- FOOTER ---------- */
 .footer-mejorado {
-  background-color: #ba68c8;
+  background-color: var(--accent-5-color);
   color: white;
   padding-block: 40px 20px;
   text-align: center;
@@ -602,7 +570,7 @@ textarea {
 }
 
 .newsletter-input-group button {
-  background-color: #33FFCC;
+  background-color: var(--accent-3-color);
   color: black;
   font-weight: bold;
   border: none;
@@ -614,6 +582,12 @@ textarea {
 
 .newsletter-input-group button:hover {
   background-color: #2fd9b0;
+}
+
+.copyright {
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  opacity: 0.5;
 }
 
 /* ---------- NAV MENU RESPONSIVE MOBILE ---------- */
@@ -643,7 +617,6 @@ textarea {
   cursor: pointer;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
 
   /* MENÚ */
@@ -657,7 +630,7 @@ textarea {
     position: absolute;
     top: 70px;
     right: 20px;
-    background: #fe56b0;
+    background: var(--accent-1-color);
     border: 1px solid #ccc;
     padding: 10px;
   }
