@@ -15,13 +15,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background-color: white;
-  color: #333;
-}
-
 /* ---------- NAVBAR PERSONALIZADA ---------- */
 .custom-navbar {
   background-color: var(--accent1-color);
@@ -69,6 +62,16 @@ body {
 
 .fw-bold {
   /* color: var(--accent-1-color); */
+}
+
+.card-img-top{
+  transition: 300ms !important;
+  filter: saturate(1) brightness(1);
+
+}
+.card:hover .card-img-top{
+  filter: saturate(1.1) brightness(1.1) !important;
+  transition: 300ms !important;
 }
 
 /* ---------- BANNER ---------- */
