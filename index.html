@@ -11,6 +11,11 @@
       integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
       crossorigin="anonymous"
     />
+
+    <script type="text/javascript" src="js/admin-salon.js"></script>
+    <script type="text/javascript" src="js/admin-servicio.js"></script>
+
+
   </head>
   <body>
     <!-- NAVBAR -->
@@ -165,6 +170,18 @@
       </div>
     </section>
 
+    <!-- CATÁLOGO DE SERVICIOS -->
+    <section class="servicios" id="servicios">
+        <h2>Servicios Disponibles</h2>
+        <div class="container py-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="servicios-container">
+                <!-- Las cards se generarán aquí dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+
+
     <!-- MÁS INFO -->
     <section class="mas-info">
       <h2>¡Celebra a lo grande!</h2>
@@ -245,5 +262,13 @@
       crossorigin="anonymous"
     ></script>
 
+    <script>
+      // Inicialización al cargar la página
+      document.addEventListener('DOMContentLoaded', function() {
+          inicializarLocalStorageServicios();
+          mostrarCatalogoServicios(); // Mostrar el catálogo al cargar
+      });
+    </script>
+    
   </body>
 </html>

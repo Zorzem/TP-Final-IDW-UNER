@@ -4,6 +4,9 @@
 const STORAGE_KEY = "salones_data";
 
 // ========== FUNCIONES DE STORAGE ==========
+
+//                                      ========== FUNCIONES DE SALONES ==========
+
 /**
  * Inicializa el almacenamiento local con datos de ejemplo si está vacío.
  * Esta función crea 9 salones de prueba solo la primera vez que se carga la aplicación.

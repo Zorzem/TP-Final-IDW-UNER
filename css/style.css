@@ -110,6 +110,20 @@ body {
   margin-bottom: 30px;
 }
 
+.servicios {
+  padding: 40px 20px;
+  background-color: #fe56b0;
+  /* Fucsia */
+  text-align: center;
+}
+
+.servicios h2 {
+  color: white;
+  /* Texto blanco */
+  margin-bottom: 30px;
+}
+
+
 .cards-grid {
   display: grid;
   /* Layout de grilla */
