@@ -1,9 +1,7 @@
-// ========== CONSTANTES ==========
+// ========== FUNCIONES DE STORAGE ==========
 
 // Clave única para los servicios
 const SERVICIOS_STORAGE_KEY = "servicios_data";
-
-// ========== FUNCIONES DE STORAGE ==========
 
 // Inicializa el almacenamiento local con datos de ejemplo si está vacío
 function inicializarLocalStorageServicios() {
@@ -26,6 +24,8 @@ function obtenerServicios() {
 function guardarServicios(servicios) {
     localStorage.setItem(SERVICIOS_STORAGE_KEY, JSON.stringify(servicios));
 }
+
+/* ———————————————————————————————————————————————————————————————————————————————————— */
 
 // ========== CRUD ==========
 

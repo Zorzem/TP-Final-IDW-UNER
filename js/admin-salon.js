@@ -1,13 +1,9 @@
-// ========== CONSTANTES ==========
+// ========== FUNCIONES DE STORAGE ==========
 
 // Clave única para identificar los datos en el localStorage
 const STORAGE_KEY = "salones_data";
 
-// ========== FUNCIONES DE STORAGE ==========
-
-/**
- * Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
- */
+// Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
 function inicializarLocalStorage() {
     if (!localStorage.getItem(STORAGE_KEY)) {
         const salonesIniciales = [
@@ -25,22 +21,17 @@ function inicializarLocalStorage() {
     }
 }
 
-
-// ========== FUNCIONES DE SALONES ==========
-
-/**
- * Obtiene todos los salones almacenados en localStorage, retorna vacío si no hay datos
- */
+//Obtiene todos los salones almacenados en localStorage, retorna vacío si no hay datos
 function obtenerSalones() {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 }
 
-/**
- * Guarda la lista completa de salones en localStorage.
- */
+// Guarda la lista completa de salones en localStorage.
 function guardarSalones(salones) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(salones));
 }
+
+/* ———————————————————————————————————————————————————————————————————————————————————— */
 
 // ========== CRUD ==========
 
@@ -208,8 +199,6 @@ function eliminarSalon(id) {
     }
 }
 
-
-/* ———————————————————————————————————— TESTINICIO ———————————————————————————————————— */
 function renderizarSalones() {
     const salones = obtenerSalones();
     const contenedor = document.getElementById("salones-container");
@@ -230,9 +219,6 @@ function renderizarSalones() {
         `;
     });
 }
-
-/* ———————————————————————————————————— TESTFIN ———————————————————————————————————— */
-
 
 
 // ========== INICIALIZACIÓN ==========
