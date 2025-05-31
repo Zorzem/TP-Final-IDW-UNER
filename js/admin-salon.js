@@ -5,13 +5,9 @@ const STORAGE_KEY = "salones_data";
 
 // ========== FUNCIONES DE STORAGE ==========
 
-//                                      ========== FUNCIONES DE SALONES ==========
-
 /**
- * Inicializa el almacenamiento local con datos de ejemplo si está vacío.
- * Esta función crea 9 salones de prueba solo la primera vez que se carga la aplicación.
+ * Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
  */
-
 function inicializarLocalStorage() {
     if (!localStorage.getItem(STORAGE_KEY)) {
         const salonesIniciales = [
@@ -28,6 +24,9 @@ function inicializarLocalStorage() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(salonesIniciales));
     }
 }
+
+
+// ========== FUNCIONES DE SALONES ==========
 
 /**
  * Obtiene todos los salones almacenados en localStorage, retorna vacío si no hay datos
@@ -78,7 +77,6 @@ function actualizarSalon(id, nombre, capacidad, precio, imagen) {
 }
 
 // ========== UI ==========
-
 function listarSalones() {
     const salones = obtenerSalones();
     let html = `
@@ -202,19 +200,47 @@ function cargarVista(categoria, accion, id = null) {
 }
 
 function eliminarSalon(id) {
-    if (confirm("¿Estás seguro de eliminar este salón?")) {
+    if (confirm("Deseas eliminar este salón?")) {
         const salones = obtenerSalones().filter(salon => salon.id !== id);
         guardarSalones(salones);
         listarSalones();
-        alert("Salón eliminado correctamente");
+        alert("Salón eliminado.");
     }
 }
+
+
+/* ———————————————————————————————————— TESTINICIO ———————————————————————————————————— */
+function renderizarSalones() {
+    const salones = obtenerSalones();
+    const contenedor = document.getElementById("salones-container");
+    contenedor.innerHTML = ""; // Limpiar antes de renderizar
+
+    salones.forEach(salon => {
+        contenedor.innerHTML += `
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="img/${salon.imagen}" class="card-img-top border border-2 border-white" alt="${salon.nombre}" />
+                <div class="card-body">
+                    <h5 class="card-title">${salon.nombre}</h5>
+                    <p class="card-text">Capacidad: ${salon.capacidad} personas</p>
+                    <p class="fw-bold">$${salon.precio}</p>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+}
+
+/* ———————————————————————————————————— TESTFIN ———————————————————————————————————— */
+
+
 
 // ========== INICIALIZACIÓN ==========
 
 // Inicializa localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     inicializarLocalStorage();
+    renderizarSalones(); 
 });
 
 // Hacer funciones accesibles globalmente
