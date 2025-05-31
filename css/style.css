@@ -1,13 +1,9 @@
 :root {
-  --main-bg-color: #fff8f0;
-  --main-text-color: #333;
-  --accent-1-color: #ff528c;
-  --accent-2-color: #9adfff;
-  --accent-3-color: #25ffc9;
-  --accent-4-color: #ffee58;
-  --accent-5-color: #d41ff4;
-  --navbar-text-color: #fff;
-  --white-text-color: #fff;
+  --accent1-color: #ff528c;
+  --accent2-color: #9adfff;
+  --accent3-color: #25ffc9;
+  --accent4-color: #ffee58;
+  --accent5-color: #d41ff4;
 }
 
 /* CSS reset */
@@ -22,13 +18,13 @@
 body {
   margin: 0;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  background-color: var(--main-bg-color);
-  color: var(--main-text-color);
+  background-color: white;
+  color: #333;
 }
 
 /* ---------- NAVBAR PERSONALIZADA ---------- */
 .custom-navbar {
-  background-color: var(--accent-1-color);
+  background-color: var(--accent1-color);
   padding: 15px;
 }
 
@@ -50,7 +46,7 @@ body {
 }
 
 .nav-link {
-  color: var(--navbar-text-color) !important;
+  color: white !important;
   text-decoration: none;
   font-weight: bold;
 }
@@ -59,19 +55,19 @@ body {
   text-decoration: underline;
 }
 
-.admin{
+.admin {
   color: white !important;
   /* background-color: white !important; */
   border: 1px solid white !important;
   transition: background 300ms !important;
 }
 
-.admin:hover{
-  background-color: var(--accent-2-color) !important;
+.admin:hover {
+  background-color: var(--accent2-color) !important;
   transition: background 300ms;
 }
 
-.fw-bold{
+.fw-bold {
   /* color: var(--accent-1-color); */
 }
 
@@ -86,7 +82,7 @@ body {
 .info {
   display: flex;
   justify-content: space-around;
-  background-color: var(--accent-2-color);
+  background-color: var(--accent2-color);
   padding: 40px;
   text-align: center;
 }
@@ -111,7 +107,7 @@ body {
 } */
 
 /* .info h3 {
-  color: var(--accent-2-color);
+  color: var(--accent2-color);
   margin-top: 20px;
 } */
 
@@ -127,7 +123,7 @@ body {
 /* ---------- SECCIÓN SALONES ---------- */
 .salones {
   padding: 40px 20px;
-  background-color: var(--accent-1-color);
+  background-color: var(--accent1-color);
   text-align: center;
 }
 
@@ -138,7 +134,7 @@ body {
 
 .servicios {
   padding: 40px 20px;
-  background-color: var(--accent-1-color);
+  background-color: var(--accent1-color);
   text-align: center;
 }
 
@@ -173,7 +169,7 @@ body {
 
 /* ---------- MÁS INFO ---------- */
 .mas-info {
-  background-color: var(--accent-3-color);
+  background-color: var(--accent3-color);
   padding: 40px 20px;
   text-align: center;
 }
@@ -186,7 +182,7 @@ body {
 /* ---------- RESEÑAS ---------- */
 .resenas {
   padding: 40px 20px;
-  background-color: var(--accent-4-color);
+  background-color: var(--accent4-color);
   text-align: center;
 }
 
@@ -243,7 +239,7 @@ textarea {
 }
 
 .btn-enviar {
-  background-color: var(--accent-3-color);
+  background-color: var(--accent3-color);
   color: black;
   font-weight: bold;
   border: none;
@@ -358,7 +354,7 @@ textarea {
 .info-item-tres:hover {
   transform: translateY(-5px) scale(1.05);
   /* Eleva y aumenta un 5% */
-  box-shadow: 0 6px 12px var(--accent-2-color);
+  box-shadow: 0 6px 12px var(--accent2-color);
 }
 
 .footer-contenido {
@@ -392,7 +388,7 @@ textarea {
 
 .newsletter-input-group button {
   padding: 10px 20px;
-  background-color: var(--accent-3-color);
+  background-color: var(--accent3-color);
   border: none;
   border-radius: 10px;
   font-weight: bold;
@@ -421,7 +417,7 @@ textarea {
 
 .form-box h2 {
   font-size: 2rem;
-  color: var(--accent-1-color);
+  color: var(--accent1-color);
   margin-bottom: 1rem;
 }
 
@@ -453,12 +449,12 @@ textarea {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--accent-1-color);
+  border-color: var(--accent1-color);
   outline: none;
 }
 
 .btn-enviar {
-  background-color: var(--accent-1-color);
+  background-color: var(--accent1-color);
   color: white;
   border: none;
   padding: 0.9rem 1.8rem;
@@ -470,7 +466,7 @@ textarea {
 }
 
 .btn-enviar:hover {
-  background-color: var(--accent-2-color);
+  background-color: var(--accent2-color);
 }
 
 /* ---------- FOOTER ---------- */
@@ -508,7 +504,7 @@ textarea {
 }
 
 .footer button {
-  background-color: var(--accent-3-color);
+  background-color: var(--accent3-color);
   border: none;
   padding: 8px 16px;
   border-radius: 10px;
@@ -517,7 +513,7 @@ textarea {
 } */
 
 .footer-mejorado {
-  background-color: var(--accent-5-color);
+  background-color: var(--accent5-color);
   color: white;
   padding-block: 40px 20px;
   text-align: center;
@@ -570,7 +566,7 @@ textarea {
 }
 
 .newsletter-input-group button {
-  background-color: var(--accent-3-color);
+  background-color: var(--accent3-color);
   color: black;
   font-weight: bold;
   border: none;
@@ -630,7 +626,7 @@ textarea {
     position: absolute;
     top: 70px;
     right: 20px;
-    background: var(--accent-1-color);
+    background: var(--accent1-color);
     border: 1px solid #ccc;
     padding: 10px;
   }
