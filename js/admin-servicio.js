@@ -204,12 +204,10 @@ function cargarVistaServicios(categoria, accion, id = null) {
 
 
 // Función para mostrar los servicios en el catálogo
-function mostrarCatalogoServicios() {
+function renderizarServicios() {
     const servicios = obtenerServicios();
     const container = document.getElementById('servicios-container');
-    
-    // Limpiar el contenedor primero
-    container.innerHTML = '';
+    container.innerHTML = ''; // Limpiar antes de renderizar
     
     // Generar una card por cada servicio
     servicios.forEach(servicio => {
@@ -230,12 +228,6 @@ function mostrarCatalogoServicios() {
 }
 
 
-
-
-
-
-
-
 // ========== INICIALIZACIÓN ==========
 
 // Inicializa localStorageServicios al cargar la página
@@ -247,4 +239,4 @@ document.addEventListener('DOMContentLoaded', function() {
 window.cargarVistaServicios = cargarVistaServicios;
 window.eliminarServicio = eliminarServicio;
 window.listarServicios = listarServicios;
-window.mostrarCatalogoServicios = mostrarCatalogoServicios;
+window.renderizarServicios = renderizarServicios;

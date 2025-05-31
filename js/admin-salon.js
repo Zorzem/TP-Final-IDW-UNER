@@ -208,11 +208,39 @@ function eliminarSalon(id) {
     }
 }
 
+
+/* ———————————————————————————————————— TESTINICIO ———————————————————————————————————— */
+function renderizarSalones() {
+    const salones = obtenerSalones();
+    const contenedor = document.getElementById("salones-container");
+    contenedor.innerHTML = ""; // Limpiar antes de renderizar
+
+    salones.forEach(salon => {
+        contenedor.innerHTML += `
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="img/${salon.imagen}" class="card-img-top border border-2 border-white" alt="${salon.nombre}" />
+                <div class="card-body">
+                    <h5 class="card-title">${salon.nombre}</h5>
+                    <p class="card-text">Capacidad: ${salon.capacidad} personas</p>
+                    <p class="fw-bold">$${salon.precio}</p>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+}
+
+/* ———————————————————————————————————— TESTFIN ———————————————————————————————————— */
+
+
+
 // ========== INICIALIZACIÓN ==========
 
 // Inicializa localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     inicializarLocalStorage();
+    renderizarSalones(); 
 });
 
 // Hacer funciones accesibles globalmente
