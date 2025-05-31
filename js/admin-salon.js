@@ -5,13 +5,9 @@ const STORAGE_KEY = "salones_data";
 
 // ========== FUNCIONES DE STORAGE ==========
 
-//                                      ========== FUNCIONES DE SALONES ==========
-
 /**
- * Inicializa el almacenamiento local con datos de ejemplo si está vacío.
- * Esta función crea 9 salones de prueba solo la primera vez que se carga la aplicación.
+ * Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
  */
-
 function inicializarLocalStorage() {
     if (!localStorage.getItem(STORAGE_KEY)) {
         const salonesIniciales = [
@@ -28,6 +24,9 @@ function inicializarLocalStorage() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(salonesIniciales));
     }
 }
+
+
+// ========== FUNCIONES DE SALONES ==========
 
 /**
  * Obtiene todos los salones almacenados en localStorage, retorna vacío si no hay datos
@@ -78,7 +77,6 @@ function actualizarSalon(id, nombre, capacidad, precio, imagen) {
 }
 
 // ========== UI ==========
-
 function listarSalones() {
     const salones = obtenerSalones();
     let html = `
@@ -202,11 +200,11 @@ function cargarVista(categoria, accion, id = null) {
 }
 
 function eliminarSalon(id) {
-    if (confirm("¿Estás seguro de eliminar este salón?")) {
+    if (confirm("Deseas eliminar este salón?")) {
         const salones = obtenerSalones().filter(salon => salon.id !== id);
         guardarSalones(salones);
         listarSalones();
-        alert("Salón eliminado correctamente");
+        alert("Salón eliminado.");
     }
 }
 
