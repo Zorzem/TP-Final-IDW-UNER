@@ -4,7 +4,7 @@
 const STORAGE_KEY = "salones_data";
 
 // Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
-function inicializarLocalStorage() {
+function inicializarLocalStorageSalones() {
     if (!localStorage.getItem(STORAGE_KEY)) {
         const salonesIniciales = [
             { id: 1, nombre: "Salón Fiesta 1", capacidad: 30, precio: 1500, imagen: "salon1.jpg" },
@@ -225,7 +225,7 @@ function renderizarSalones() {
 
 // Inicializa localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
-    inicializarLocalStorage();
+    inicializarLocalStorageSalones();
     renderizarSalones(); 
 });
 
