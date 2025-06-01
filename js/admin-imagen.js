@@ -81,29 +81,53 @@ function listarImagenes() {
 
 function mostrarFormularioImagen(imagen = null) {
   const esEdicion = imagen !== null;
+  const archivoActual = imagen?.archivo || '';
+
   const formHtml = `
     <h3>${esEdicion ? 'Editar' : 'Crear'} Imagen</h3>
     <form id="form-imagen">
       <input type="hidden" id="imagen-id" value="${esEdicion ? imagen.id : ''}" />
+      
       <div class="mb-3">
         <label for="titulo" class="form-label">Título</label>
         <input type="text" class="form-control" id="titulo" value="${esEdicion ? imagen.titulo : ''}" required />
       </div>
+
       <div class="mb-3">
         <label for="descripcion" class="form-label">Descripción</label>
         <textarea class="form-control" id="descripcion" required>${esEdicion ? imagen.descripcion : ''}</textarea>
       </div>
+
       <div class="mb-3">
         <label for="archivo" class="form-label">Nombre del Archivo (ej: imagen.jpg)</label>
-        <input type="text" class="form-control" id="archivo" value="${esEdicion ? imagen.archivo : ''}" required />
+        <input type="text" class="form-control" id="archivo" value="${archivoActual}" required />
       </div>
+
+      <div class="mb-3">
+        <label class="form-label">Vista previa</label><br />
+        <img id="preview-imagen" src="../../img/${archivoActual}" style="width: 200px; max-height: 150px; border: 1px solid #ccc" 
+             onerror="this.src='../../img/no-image.png';" />
+      </div>
+
       <button type="submit" class="btn btn-primary">${esEdicion ? 'Actualizar' : 'Guardar'}</button>
     </form>`;
 
   document.getElementById("contenido-admin").innerHTML = formHtml;
 
+  // Evento para actualizar vista previa
+  const inputArchivo = document.getElementById("archivo");
+  const previewImg = document.getElementById("preview-imagen");
+
+  inputArchivo.addEventListener("input", function () {
+    const nombreArchivo = inputArchivo.value.trim();
+    if (nombreArchivo) {
+      previewImg.src = `../../img/${nombreArchivo}`;
+    }
+  });
+
   document.getElementById("form-imagen").addEventListener("submit", function (e) {
     e.preventDefault();
+
     const id = parseInt(document.getElementById("imagen-id").value) || null;
     const titulo = document.getElementById("titulo").value.trim();
     const descripcion = document.getElementById("descripcion").value.trim();
@@ -111,6 +135,12 @@ function mostrarFormularioImagen(imagen = null) {
 
     if (!titulo || !descripcion || !archivo) {
       alert("Todos los campos son obligatorios");
+      return;
+    }
+    // Validar extensión del archivo
+    const extensionValida = /\.(jpg|jpeg|png)$/i.test(archivo);
+    if (!extensionValida) {
+      alert("El archivo debe tener formato .jpg, .jpeg o .png");
       return;
     }
 
