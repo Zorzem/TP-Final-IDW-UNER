@@ -188,8 +188,8 @@ function mostrarFormularioCrear(salon = null) {
 
         <div class="mb-3">
             <label for="capacidad" class="form-label">Capacidad</label>
-            <input type="number" class="form-control" id="capacidad" 
-                   value="${esEdicion ? salon.capacidad : ''}" required min="1" max="200">
+            <input type="number" class="form-control" id="capacidad" min="1" max="200"
+                   value="${esEdicion ? salon.capacidad : ''}" required >
             <div class="invalid-feedback">Por favor ingresa la capacidad</div>
             <small class="text-muted">Capacidad máxima 200 personas.</small>
         </div>
@@ -236,6 +236,7 @@ function mostrarFormularioCrear(salon = null) {
         if (!form.checkValidity()) {
             e.stopPropagation();
             form.classList.add('was-validated');
+            return;
         }
 
         const id = document.getElementById('salon-id').value;
@@ -245,10 +246,10 @@ function mostrarFormularioCrear(salon = null) {
 
         if (esEdicion) {
             actualizarSalon(parseInt(id), nombre, capacidad, precio, imagen);
-            mostrarMensaje('success', 'Salón actualizado correctamente'); // SweetAlert2
+            mostrarMensaje('success', 'Salón actualizado correctamente');
         } else {
             crearSalon(nombre, capacidad, precio, imagen);
-            mostrarMensaje('success', 'Salón creado correctamente'); // SweetAlert2
+            mostrarMensaje('success', 'Salón creado correctamente'); 
         }
 
 
@@ -339,7 +340,9 @@ function renderizarSalones() {
 // Inicializa localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     inicializarLocalStorageSalones();
-    renderizarSalones(); 
+    if (document.getElementById("salones-container")) {
+        renderizarSalones();
+    }
 });
 
 // Hacer funciones accesibles globalmente

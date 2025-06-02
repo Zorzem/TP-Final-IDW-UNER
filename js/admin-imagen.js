@@ -119,12 +119,14 @@ function mostrarFormularioImagen(imagen = null) {
   const inputArchivo = document.getElementById("archivo");
   const previewImg = document.getElementById("preview-imagen");
 
-  inputArchivo.addEventListener("input", function () {
-    const nombreArchivo = inputArchivo.value.trim();
-    if (nombreArchivo) {
-      previewImg.src = `../../img/${nombreArchivo}`;
-    }
-  });
+  if (inputArchivo && previewImg) {
+    inputArchivo.addEventListener("input", function () {
+      const nombreArchivo = inputArchivo.value.trim();
+      if (nombreArchivo) {
+        previewImg.src = `../../img/${nombreArchivo}`;
+      }
+    });
+  }
 
   document.getElementById("form-imagen").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -193,8 +195,12 @@ function renderizarImagenes() {
 
 // ========== INICIALIZACIÓN ==========
 document.addEventListener("DOMContentLoaded", function () {
-  inicializarImagenesStorage();
-  renderizarImagenes();
+    inicializarImagenesStorage();
+  
+    if (document.getElementById("galeria-container")) {
+      renderizarImagenes(); 
+    }
+
 });
 
 // ========== INTEGRACIÓN GLOBAL ==========

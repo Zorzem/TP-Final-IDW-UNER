@@ -233,7 +233,9 @@ function renderizarServicios() {
 // Inicializa localStorageServicios al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     inicializarLocalStorageServicios();
-    renderizarServicios();
+    if (document.getElementById("servicios-container")) {
+        renderizarServicios();
+    }
 });
 
 // Hacer funciones accesibles globalmente
