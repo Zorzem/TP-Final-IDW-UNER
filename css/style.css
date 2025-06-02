@@ -104,28 +104,6 @@
   font-weight: bold;
 }
 
-/* Las siguientes reglas no se usan */
-/* .info h2 {
-  color: #ba68c8;
-} */
-
-/* .info span {
-  color: #ff66cc;
-} */
-
-/* .info h3 {
-  color: var(--accent2-color);
-  margin-top: 20px;
-} */
-
-/* .info ul {
-  list-style: none;
-  padding: 0;
-} */
-
-/* .info li {
-  margin-bottom: 8px;
-} */
 
 /* ---------- SECCIÓN SALONES ---------- */
 .salones {
@@ -303,7 +281,6 @@ textarea {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para el contenido del texto dentro de cada item */
 .info-item-institucional div {
   flex: 1;
   max-width: 500px;
@@ -347,8 +324,12 @@ textarea {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
+.galeria-img-text{
+  padding: 1rem;
+  font-style: italic;
+  background-color: var(--accent2-color) !important;
+}
 
-/* Control de tamaño de imagenes en carrusel clientes felices*/
 .carousel-img {
   width: 100px;
   height: 100px;
@@ -475,49 +456,6 @@ textarea {
 .btn-enviar:hover {
   background-color: var(--accent2-color);
 }
-
-/* ---------- FOOTER ---------- */
-/* Reglas que no se usan... */
-/* 
-.footer {
-  background-color: #ba68c8;
-  color: white;
-  text-align: center;
-  padding: 30px 20px;
-  border-top: 5px solid #ffee58;
-}
-
-.footer .social-icons {
-  margin-bottom: 15px;
-}
-
-.footer .social-icons a {
-  font-size: 1.5rem;
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.footer .newsletter-form {
-  margin-bottom: 15px;
-}
-
-.footer input[type="email"] {
-  padding: 8px;
-  border-radius: 10px;
-  border: none;
-  margin-right: 10px;
-  font-family: inherit;
-}
-
-.footer button {
-  background-color: var(--accent3-color);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-} */
 
 .footer-mejorado {
   background-color: var(--accent5-color);

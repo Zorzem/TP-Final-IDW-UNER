@@ -6,7 +6,8 @@ function inicializarImagenesStorage() {
   if (!localStorage.getItem(IMAGENES_KEY)) {
     const imagenesIniciales = [
       { id: 1, titulo: "Candy Bar", descripcion: "Mesa dulce temática", archivo: "candybar.jpg" },
-      { id: 2, titulo: "Globos", descripcion: "Decoración con globos", archivo: "globos.jpg" }
+      { id: 2, titulo: "Globos", descripcion: "Decoración con globos", archivo: "globos.jpg" },
+      { id: 3, titulo: "Niños", descripcion: "Diversión para todos", archivo: "party.jpg" },
     ];
     localStorage.setItem(IMAGENES_KEY, JSON.stringify(imagenesIniciales));
   }
@@ -22,7 +23,7 @@ function guardarImagenes(imagenes) {
 
 function crearImagen(titulo, descripcion, archivo) {
   const imagenes = obtenerImagenes();
-  const nuevoId = imagenes.length > 0 ? Math.max(...imagenes.map(i => i.id)) + 1 : 1;
+  const nuevoId = imagenes.length > 0 ? Math.max(...imagenes.map((i) => i.id)) + 1 : 1;
   const nueva = { id: nuevoId, titulo, descripcion, archivo };
   imagenes.push(nueva);
   guardarImagenes(imagenes);
@@ -30,7 +31,7 @@ function crearImagen(titulo, descripcion, archivo) {
 
 function actualizarImagen(id, titulo, descripcion, archivo) {
   const imagenes = obtenerImagenes();
-  const index = imagenes.findIndex(i => i.id === id);
+  const index = imagenes.findIndex((i) => i.id === id);
   if (index !== -1) {
     imagenes[index] = { id, titulo, descripcion, archivo };
     guardarImagenes(imagenes);
@@ -38,7 +39,7 @@ function actualizarImagen(id, titulo, descripcion, archivo) {
 }
 
 function eliminarImagen(id) {
-  const imagenes = obtenerImagenes().filter(i => i.id !== id);
+  const imagenes = obtenerImagenes().filter((i) => i.id !== id);
   guardarImagenes(imagenes);
 }
 
@@ -60,7 +61,7 @@ function listarImagenes() {
       </thead>
       <tbody>`;
 
-  imagenes.forEach(img => {
+  imagenes.forEach((img) => {
     html += `
       <tr>
         <td>${img.id}</td>
@@ -81,21 +82,21 @@ function listarImagenes() {
 
 function mostrarFormularioImagen(imagen = null) {
   const esEdicion = imagen !== null;
-  const archivoActual = imagen?.archivo || '';
+  const archivoActual = imagen?.archivo || "";
 
   const formHtml = `
-    <h3>${esEdicion ? 'Editar' : 'Crear'} Imagen</h3>
+    <h3>${esEdicion ? "Editar" : "Crear"} Imagen</h3>
     <form id="form-imagen">
-      <input type="hidden" id="imagen-id" value="${esEdicion ? imagen.id : ''}" />
+      <input type="hidden" id="imagen-id" value="${esEdicion ? imagen.id : ""}" />
       
       <div class="mb-3">
         <label for="titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" id="titulo" value="${esEdicion ? imagen.titulo : ''}" required />
+        <input type="text" class="form-control" id="titulo" value="${esEdicion ? imagen.titulo : ""}" required />
       </div>
 
       <div class="mb-3">
         <label for="descripcion" class="form-label">Descripción</label>
-        <textarea class="form-control" id="descripcion" required>${esEdicion ? imagen.descripcion : ''}</textarea>
+        <textarea class="form-control" id="descripcion" required>${esEdicion ? imagen.descripcion : ""}</textarea>
       </div>
 
       <div class="mb-3">
@@ -109,12 +110,12 @@ function mostrarFormularioImagen(imagen = null) {
              onerror="this.src='../../img/no-image.png';" />
       </div>
 
-      <button type="submit" class="btn btn-primary">${esEdicion ? 'Actualizar' : 'Guardar'}</button>
+      <button type="submit" class="btn btn-primary">${esEdicion ? "Actualizar" : "Guardar"}</button>
     </form>`;
 
   document.getElementById("contenido-admin").innerHTML = formHtml;
 
-  // Evento para actualizar vista previa
+  // actualizar vista previa
   const inputArchivo = document.getElementById("archivo");
   const previewImg = document.getElementById("preview-imagen");
 
@@ -137,7 +138,7 @@ function mostrarFormularioImagen(imagen = null) {
       alert("Todos los campos son obligatorios");
       return;
     }
-    // Validar extensión del archivo
+    // validar extensión del archivo
     const extensionValida = /\.(jpg|jpeg|png)$/i.test(archivo);
     if (!extensionValida) {
       alert("El archivo debe tener formato .jpg, .jpeg o .png");
@@ -157,7 +158,7 @@ function mostrarFormularioImagen(imagen = null) {
 }
 
 function mostrarFormularioEditarImagen(id) {
-  const imagen = obtenerImagenes().find(i => i.id === id);
+  const imagen = obtenerImagenes().find((i) => i.id === id);
   if (imagen) {
     mostrarFormularioImagen(imagen);
   } else {
@@ -167,26 +168,43 @@ function mostrarFormularioEditarImagen(id) {
 }
 
 function eliminarImagenConfirmado(id) {
-  if (confirm("¿Estás seguro de eliminar esta imagen?")) {
+  if (confirm("Deseás eliminar esta imagen?")) {
     eliminarImagen(id);
     listarImagenes();
     alert("Imagen eliminada correctamente");
   }
 }
 
+function renderizarImagenes() {
+  const imagenes = JSON.parse(localStorage.getItem(IMAGENES_KEY)) || [];
+  const contenedor = document.getElementById("galeria-container");
+  contenedor.innerHTML = "";
+  imagenes.forEach((img) => {
+    contenedor.innerHTML += `
+      <div class="col">
+        <div class="card h-100 shadow">
+          <img src="img/${img.archivo}" class="" alt="${img.titulo}" />
+          <p class="card-text galeria-img-text">${img.descripcion}</p>
+        </div>
+      </div>
+      `;
+  });
+}
+
 // ========== INICIALIZACIÓN ==========
 document.addEventListener("DOMContentLoaded", function () {
   inicializarImagenesStorage();
+  renderizarImagenes();
 });
 
 // ========== INTEGRACIÓN GLOBAL ==========
 const originalCargarVista = window.cargarVista || function () {};
 
 window.cargarVista = function (categoria, accion, id = null) {
-  if (categoria === 'imagenes') {
-    if (accion === 'listar') listarImagenes();
-    else if (accion === 'crear') mostrarFormularioImagen();
-    else if (accion === 'editar') mostrarFormularioEditarImagen(id);
+  if (categoria === "imagenes") {
+    if (accion === "listar") listarImagenes();
+    else if (accion === "crear") mostrarFormularioImagen();
+    else if (accion === "editar") mostrarFormularioEditarImagen(id);
   } else {
     originalCargarVista(categoria, accion, id);
   }
