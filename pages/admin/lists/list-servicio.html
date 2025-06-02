@@ -2,93 +2,116 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lista de Servicios | Admin Planeta Fiesta</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listado de Servicios</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <style>
+        body {
+          background-color: #f8f9fa;
+        }
+        .navbar-rosa {
+          background-color: #ee479a !important;
+        }
+        .navbar-rosa .navbar-brand {
+          color: white;
+          font-weight: 700;
+          font-size: 1.8rem;
+        }
+        .navbar-rosa .navbar-brand:hover {
+          color: #ffc1e3;
+          text-decoration: none;
+        }
+        .btn-volver {
+          background-color: #0abcc9;
+          color: white;
+          border-radius: 25px;
+          padding: 0.4rem 1rem;
+          font-weight: 600;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+          text-decoration: none;
+        }
+        .btn-volver:hover {
+          background-color: #06a7a4;
+          box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+        }
+        .btn-create {
+          background-color: #38d15b;
+          color: white;
+        }
+        .btn-edit {
+          background-color: #ffc107;
+          color: black;
+        }
+        .btn-delete {
+          background-color: #dc3545;
+          color: white;
+        }
+        .table th {
+          background-color: #98e6eb;
+          color: black;
+        }
+        .table-img {
+          width: 80px;
+          height: auto;
+          border-radius: 0.25rem;
+        }
+        h2 {
+          color: #333;
+        }
+        .pagination .page-link {
+          color: #000;
+        }
+        .pagination .active .page-link {
+          background-color: #000;
+          border-color: #000;
+          color: #fff;
+        }
+      </style>
+    </head>
 
-  <style>
-    body {
-      background: #f9faff;
-      color: #333;
-    }
-    .table thead {
-      background: #82d4d4; /* celeste */
-      color: #fff;
-    }
-    .table-striped tbody tr:nth-of-type(odd) {
-      background-color: #cef0f0;
-    }
-    .btn-edit {
-      background-color: #4caf50;
-      color: white;
-    }
-    .btn-delete {
-      background-color: #f44336;
-      color: white;
-    }
-    .table-img {
-      width: 80px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-    h2 {
-      color: #208080;
-      margin-bottom: 1.5rem;
-    }
-  </style>
-</head>
-<body>
-  <main class="container my-4">
-    <h2 class="text-center">Lista de Servicios</h2>
-    <div class="table-responsive shadow rounded">
-      <table class="table table-striped align-middle">
+    <body>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-rosa px-4">
+        <a class="navbar-brand" href="#">Servicios</a>
+        <div class="ms-auto d-flex gap-2">
+          <a href="/index.html" class="btn btn-volver">
+            <i class="bi bi-house-fill"></i> Inicio
+          </a>
+          <a href="/pages/admin/menu.html" class="btn btn-volver">
+            <i class="bi bi-arrow-left-square-fill"></i> Panel Admin
+          </a>
+        </div>
+      </nav>
+
+  <!-- Contenido -->
+  <main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <a href="/pages/admin/forms/form-servicio.html" class="btn btn-create">
+        <i class="bi bi-plus-circle"></i> Crear Servicio
+      </a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover shadow text-center align-middle">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Tiempo (hs)</th>
+            <th>Tiempo</th>
             <th>Precio</th>
-            <th>Imagen</th>
-            <th class="text-center">Acciones</th>
+            <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Decoracion tematica</td>
-            <td>5 horas</td>
-            <td>$5000.00</td>
-            <td><img src="../../img/servicios/icon1.png" alt="Decoracion tematica" class="table-img" /></td>
-            <td class="text-center">
-              <button class="btn btn-edit btn-sm me-2" data-bs-toggle="tooltip" title="Editar">
-                <i class="bi bi-pencil-fill"></i>
-              </button>
-              <button class="btn btn-delete btn-sm" data-bs-toggle="tooltip" title="Eliminar">
-                <i class="bi bi-trash-fill"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Animación para todas las edades</td>
-            <td>2 horas</td>
-            <td>$6500.00</td>
-            <td><img src="../../img/servicios/icon2.png" alt="Animación para todas las edades" class="table-img" /></td>
-            <td class="text-center">
-              <button class="btn btn-edit btn-sm me-2" data-bs-toggle="tooltip" title="Editar">
-                <i class="bi bi-pencil-fill"></i>
-              </button>
-              <button class="btn btn-delete btn-sm" data-bs-toggle="tooltip" title="Eliminar">
-                <i class="bi bi-trash-fill"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Catering</td>
-            <td>5 horas</td>
-            <td>$8500.00</td>
-            <td><img src="../../img/servicios/icon3.png" alt="Catering" class=
+        <tbody id="servicios-body">
+          <!-- Aquí se llenarán los servicios con JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="/js/admin-servicio.js"></script>
+</body>
+</html>
