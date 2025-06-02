@@ -31,6 +31,67 @@ function guardarSalones(salones) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(salones));
 }
 
+// Muestra un mensaje de éxito, error o confirmación con SweetAlert2
+function mostrarMensaje(tipo, mensaje) {
+    switch(tipo) {
+        case 'success':
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: mensaje,
+                timer: 2000, // Desaparece después de 2 segundos
+                showConfirmButton: false
+            });
+            break;
+        case 'error':
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: mensaje,
+                timer: 2000, // Desaparece después de 2 segundos
+                showConfirmButton: false
+            });
+            break;
+        case 'warning':
+            Swal.fire({
+                icon: 'warning',
+                title: '¡Advertencia!',
+                text: mensaje,
+                timer: 2000, // Desaparece después de 2 segundos
+                showConfirmButton: false
+            });
+            break;
+        case 'confirm':
+            // Confirmación de eliminación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: mensaje,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'No',
+                focusCancel: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, ejecutamos la acción de eliminación
+                    eliminarSalon();
+                }
+            });
+            break;
+        default:
+            console.error('Tipo de mensaje no soportado');
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
 /* ———————————————————————————————————————————————————————————————————————————————————— */
 
 // ========== CRUD ==========
@@ -47,6 +108,7 @@ function crearSalon(nombre, capacidad, precio, imagen) {
     };
     salones.push(nuevoSalon);
     guardarSalones(salones);
+    mostrarMensaje('success', 'Salón creado correctamente'); // Usamos SweetAlert2
     return nuevoSalon;
 }
 
@@ -62,10 +124,14 @@ function actualizarSalon(id, nombre, capacidad, precio, imagen) {
             imagen
         };
         guardarSalones(salones);
+        mostrarMensaje('success', 'Salón actualizado correctamente'); // Usamos SweetAlert2 para el éxito
         return salones[index];
     }
+    mostrarMensaje('error', 'Hubo un error al actualizar el salón'); // SweetAlert2 en caso de error
     return null;
 }
+
+
 
 // ========== UI ==========
 function listarSalones() {
@@ -110,61 +176,88 @@ function mostrarFormularioCrear(salon = null) {
     <h3>${esEdicion ? 'Editar' : 'Crear'} Salón</h3>
     <form id="form-salones" class="needs-validation" novalidate>
         <input type="hidden" id="salon-id" value="${esEdicion ? salon.id : ''}">
+        
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" 
-                   value="${esEdicion ? salon.nombre : ''}" required>
-            <div class="invalid-feedback">Por favor ingresa un nombre</div>
+                   value="${esEdicion ? salon.nombre : ''}" required 
+                   pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+$">
+            <div class="invalid-feedback">Por favor ingresa un nombre válido (letras, números y espacios).</div>
+            <small class="text-muted">No se deben poner caracteres especiales o símbolos, solo letras (con o sin tilde), números y espacios.</small>
         </div>
+
         <div class="mb-3">
             <label for="capacidad" class="form-label">Capacidad</label>
             <input type="number" class="form-control" id="capacidad" 
-                   value="${esEdicion ? salon.capacidad : ''}" required min="1">
+                   value="${esEdicion ? salon.capacidad : ''}" required min="1" max="200">
             <div class="invalid-feedback">Por favor ingresa la capacidad</div>
+            <small class="text-muted">Capacidad máxima 200 personas.</small>
         </div>
+
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
             <input type="number" step="0.01" class="form-control" id="precio" 
                    value="${esEdicion ? salon.precio : ''}" required min="0.01">
             <div class="invalid-feedback">Por favor ingresa el precio</div>
         </div>
+
         <div class="mb-3">
             <label for="imagen" class="form-label">Nombre de Imagen</label>
             <input type="text" class="form-control" id="imagen" 
-                   value="${esEdicion ? salon.imagen : ''}" required>
+                   value="${esEdicion ? salon.imagen : ''}" required 
+                   pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+$">
             <div class="invalid-feedback">Por favor ingresa el nombre de la imagen</div>
         </div>
+
         <button type="submit" class="btn btn-primary">${esEdicion ? 'Actualizar' : 'Guardar'}</button>
     </form>`;
-    
-    document.getElementById("contenido-admin").innerHTML = formHtml;
-    
+
+    const contenidoAdmin = document.getElementById("contenido-admin");
+    if (contenidoAdmin) {
+        contenidoAdmin.innerHTML = formHtml;
+    }
+
     const form = document.getElementById("form-salones");
+    
+    // Evento de submit
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();  // Eliminar espacios al inicio y final
+        const regex = /^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]*$/;  // Expresión regular para validar nombre
+
+        // Validación personalizada
+        if (!regex.test(nombre)) {
+            alert('El nombre solo debe contener letras, números y espacios.');
+            return;
+        }
+
+        // Si la validación pasa, realizar el envío del formulario o el procesamiento necesario
         if (!form.checkValidity()) {
             e.stopPropagation();
             form.classList.add('was-validated');
-            return;
         }
-        
+
         const id = document.getElementById('salon-id').value;
-        const nombre = document.getElementById('nombre').value;
         const capacidad = document.getElementById('capacidad').value;
         const precio = document.getElementById('precio').value;
         const imagen = document.getElementById('imagen').value;
-        
+
         if (esEdicion) {
             actualizarSalon(parseInt(id), nombre, capacidad, precio, imagen);
-            alert("Salón actualizado correctamente");
+            mostrarMensaje('success', 'Salón actualizado correctamente'); // SweetAlert2
         } else {
             crearSalon(nombre, capacidad, precio, imagen);
-            alert("Salón creado correctamente");
+            mostrarMensaje('success', 'Salón creado correctamente'); // SweetAlert2
         }
-        
+
+
         listarSalones();
     });
+
 }
+
+
 
 function mostrarFormularioEditar(id) {
     const salones = obtenerSalones();
@@ -191,13 +284,33 @@ function cargarVista(categoria, accion, id = null) {
 }
 
 function eliminarSalon(id) {
-    if (confirm("Deseas eliminar este salón?")) {
-        const salones = obtenerSalones().filter(salon => salon.id !== id);
-        guardarSalones(salones);
-        listarSalones();
-        alert("Salón eliminado.");
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡Este salón será eliminado permanentemente!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Eliminar el salón
+            const salones = obtenerSalones().filter(salon => salon.id !== id);
+            guardarSalones(salones);
+            listarSalones();
+            // Mostrar mensaje de éxito con SweetAlert2
+            mostrarMensaje('success', 'Salón eliminado con éxito');
+        } else {
+            // Si se cancela la eliminación
+            Swal.fire(
+                'Cancelado',
+                'El salón no fue eliminado.',
+                'error'
+            );
+        }
+    });
 }
+
 
 function renderizarSalones() {
     const salones = obtenerSalones();
