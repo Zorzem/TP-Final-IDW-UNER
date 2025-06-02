@@ -181,7 +181,7 @@ function mostrarFormularioCrear(salon = null) {
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" 
                    value="${esEdicion ? salon.nombre : ''}" required 
-                   pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+$">
+                   pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+">
             <div class="invalid-feedback">Por favor ingresa un nombre válido (letras, números y espacios).</div>
             <small class="text-muted">No se deben poner caracteres especiales o símbolos, solo letras (con o sin tilde), números y espacios.</small>
         </div>
@@ -205,7 +205,7 @@ function mostrarFormularioCrear(salon = null) {
             <label for="imagen" class="form-label">Nombre de Imagen</label>
             <input type="text" class="form-control" id="imagen" 
                    value="${esEdicion ? salon.imagen : ''}" required 
-                   pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+$">
+                   pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+\.[a-zA-Z]{3,4}">
             <div class="invalid-feedback">Por favor ingresa el nombre de la imagen</div>
         </div>
 
@@ -223,26 +223,34 @@ function mostrarFormularioCrear(salon = null) {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const nombre = document.getElementById('nombre').value.trim();  // Eliminar espacios al inicio y final
-        const regex = /^[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]*$/;  // Expresión regular para validar nombre
+        const nombre = document.getElementById('nombre').value.trim();
+        const imagen = document.getElementById('imagen').value.trim();
 
-        // Validación personalizada
-        if (!regex.test(nombre)) {
-            alert('El nombre solo debe contener letras, números y espacios.');
+        const capacidad = document.getElementById('capacidad').value;
+        const capacidad_num = parseInt(capacidad);
+        
+        // Validación para nombre (permite letras, números, espacios y acentos)
+        const nombreRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!nombreRegex.test(nombre)) {
+            mostrarMensaje('error', 'Nombre inválido. Use letras, números y espacios');
+            return;
+        }
+        
+        // Validación para imagen (permite letras, números, espacios, guiones y extensión)
+        const imagenRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+\.[a-zA-Z]{3,4}$/;
+        if (!imagenRegex.test(imagen)) {
+            mostrarMensaje('error', 'Formato de imagen inválido. Ejemplo: salon-fiesta.jpg');
             return;
         }
 
-        // Si la validación pasa, realizar el envío del formulario o el procesamiento necesario
-        if (!form.checkValidity()) {
-            e.stopPropagation();
-            form.classList.add('was-validated');
+        if (isNaN(capacidad_num) || capacidad_num < 1 || capacidad_num > 200) {
+            mostrarMensaje('error', 'La capacidad debe ser un número entre 1 y 200');
             return;
-        }
+        } 
 
         const id = document.getElementById('salon-id').value;
-        const capacidad = document.getElementById('capacidad').value;
+        
         const precio = document.getElementById('precio').value;
-        const imagen = document.getElementById('imagen').value;
 
         if (esEdicion) {
             actualizarSalon(parseInt(id), nombre, capacidad, precio, imagen);

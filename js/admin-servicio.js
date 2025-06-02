@@ -65,12 +65,30 @@ function actualizarServicio(id, nombre, tiempo_hs, precio, imagen) {
 
 // Elimina un servicio
 function eliminarServicio(id) {
-    if (confirm("¿Estás seguro de eliminar este servicio?")) {
-        const servicios = obtenerServicios().filter(servicio => servicio.id !== id);
-        guardarServicios(servicios);
-        listarServicios();
-        alert("Servicio eliminado correctamente");
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡Este servicio será eliminado permanentemente!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Eliminar el servicio
+            const servicios = obtenerServicios().filter(servicio => servicio.id !== id);
+            guardarServicios(servicios);
+            listarServicios();
+            mostrarMensaje('success', 'Servicio eliminado con éxito');
+        } else {
+            // Si se cancela la eliminación
+            Swal.fire(
+                'Cancelado',
+                'El servicio no fue eliminado.',
+                'error'
+            );
+        }
+    });
 }
 
 // ========== UI ==========
@@ -165,10 +183,10 @@ function mostrarFormularioCrearServicio(servicio = null) {
         
         if (esEdicion) {
             actualizarServicio(parseInt(id), nombre, tiempo_hs, precio, imagen);
-            alert("Servicio actualizado correctamente");
+             mostrarMensaje('success', 'Servicio actualizado correctamente');
         } else {
             crearServicio(nombre, tiempo_hs, precio, imagen);
-            alert("Servicio creado correctamente");
+             mostrarMensaje('success', 'Servicio creado correctamente'); 
         }
         
         listarServicios();

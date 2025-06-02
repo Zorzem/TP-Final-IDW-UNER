@@ -143,16 +143,16 @@ function mostrarFormularioImagen(imagen = null) {
     // validar extensión del archivo
     const extensionValida = /\.(jpg|jpeg|png)$/i.test(archivo);
     if (!extensionValida) {
-      alert("El archivo debe tener formato .jpg, .jpeg o .png");
+      mostrarMensaje('error', 'El archivo debe tener formato .jpg, .jpeg o .png');
       return;
     }
 
     if (esEdicion) {
       actualizarImagen(id, titulo, descripcion, archivo);
-      alert("Imagen actualizada correctamente");
+       mostrarMensaje('success', 'Imagen actualizada correctamente');
     } else {
       crearImagen(titulo, descripcion, archivo);
-      alert("Imagen creada correctamente");
+      mostrarMensaje('success', 'Imagen creada correctamente'); 
     }
 
     listarImagenes();
@@ -169,12 +169,32 @@ function mostrarFormularioEditarImagen(id) {
   }
 }
 
+
+
 function eliminarImagenConfirmado(id) {
-  if (confirm("Deseás eliminar esta imagen?")) {
-    eliminarImagen(id);
-    listarImagenes();
-    alert("Imagen eliminada correctamente");
-  }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡Esta imagen será eliminada permanentemente!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Eliminar imagen
+            eliminarImagen(id);
+            listarImagenes();
+            mostrarMensaje('success', 'Imagen eliminada correctamente');
+        } else {
+            // Si se cancela la eliminación
+            Swal.fire(
+                'Cancelado',
+                'La imagen no fue eliminada.',
+                'error'
+            );
+        }
+    });
 }
 
 function renderizarImagenes() {
