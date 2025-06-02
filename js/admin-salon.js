@@ -104,10 +104,11 @@ function confirmarAccion(accion, id) {
 // Eliminar salón por ID
 function eliminarSalon(id) {
   let salones = obtenerSalones();
-  salones = salones.filter(salon => salon.id !== id);
+  salones = salones.filter(salon => Number(salon.id) !== Number(id));
   guardarSalones(salones);
   cargarSalones();
 }
+
 
 // Crear nuevo salón desde formulario
 function crearSalon() {

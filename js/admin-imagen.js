@@ -1,125 +1,155 @@
-// SweetAlert: mensaje general
-function mostrarMensaje(tipo, mensaje) {
-  Swal.fire({
-    icon: tipo,
-    title: mensaje,
-    timer: 2000,
-    showConfirmButton: false
-  });
+// ========== FUNCIONES DE STORAGE ==========
+
+const STORAGE_KEY_IMAGES = "imagenes_data";
+
+// Inicializa el localStorage con 9 imágenes si no existen
+function inicializarLocalStorageImagenes() {
+  if (!localStorage.getItem(STORAGE_KEY_IMAGES)) {
+    const imagenesIniciales = [
+      { id: 1, nombre: "Imagen Salón 1", archivo: "salon1.jpg" },
+      { id: 2, nombre: "Imagen Salón 2", archivo: "salon2.jpg" },
+      { id: 3, nombre: "Imagen Salón 3", archivo: "salon3.jpg" },
+      { id: 4, nombre: "Imagen Salón 4", archivo: "salon4.jpg" },
+      { id: 5, nombre: "Imagen Salón 5", archivo: "salon5.jpg" },
+      { id: 6, nombre: "Imagen Salón 6", archivo: "salon6.jpg" },
+      { id: 7, nombre: "Imagen Salón 7", archivo: "salon7.jpg" },
+      { id: 8, nombre: "Imagen Salón 8", archivo: "salon8.jpg" },
+      { id: 9, nombre: "Imagen Salón 9", archivo: "salon9.jpg" }
+    ];
+    localStorage.setItem(STORAGE_KEY_IMAGES, JSON.stringify(imagenesIniciales));
+  }
 }
 
-// SweetAlert: confirmar acciones
-function confirmarAccion(mensaje, callback) {
-  Swal.fire({
-    title: mensaje,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#28a745',
-    cancelButtonColor: '#f06292',
-    confirmButtonText: 'Sí, confirmar'
-  }).then((result) => {
-    if (result.isConfirmed) callback();
-  });
+// Obtener todas las imágenes guardadas
+function obtenerImagenes() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY_IMAGES)) || [];
 }
 
-// Valida nombre sin símbolos
-function validarTextoSinSimbolos(texto) {
-  const regex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ]+$/;
-  return regex.test(texto);
+// Guardar todas las imágenes
+function guardarImagenes(imagenes) {
+  localStorage.setItem(STORAGE_KEY_IMAGES, JSON.stringify(imagenes));
 }
 
-// Carga inicial
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('formImagen');
-  const nombreInput = document.getElementById('nombreImagen');
-  const archivoInput = document.getElementById('archivo');
-  const tablaBody = document.getElementById('imagenTableBody');
+// Obtener siguiente ID (máximo + 1)
+function obtenerSiguienteIdImagen() {
+  const imagenes = obtenerImagenes();
+  if (imagenes.length === 0) return 1;
+  const maxId = imagenes.reduce((max, img) => (img.id > max ? img.id : max), 0);
+  return maxId + 1;
+}
 
-  let contadorID = 1;
+// Cargar imágenes en la tabla HTML
+function cargarImagenes() {
+  const imagenes = obtenerImagenes();
+  const tbody = document.getElementById("imagenes-body");
+  if (!tbody) {
+    console.error("No se encontró el tbody con id 'imagenes-body'");
+    return;
+  }
+  tbody.innerHTML = "";
 
-  // Evento submit
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const nombre = nombreInput.value.trim();
-    const archivo = archivoInput.files[0];
-
-    // Validaciones
-    if (!validarTextoSinSimbolos(nombre)) {
-      mostrarMensaje('error', 'El nombre es inválido. No uses símbolos.');
-      return;
-    }
-
-    if (!archivo) {
-      mostrarMensaje('error', 'Debe seleccionar una imagen.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      // Crear fila
-      const nuevaFila = document.createElement('tr');
-      nuevaFila.innerHTML = `
-        <td>${contadorID}</td>
-        <td>${nombre}</td>
-        <td><img src="${event.target.result}" width="80" height="60" class="rounded"></td>
-        <td>
-          <button class="btn btn-success btn-sm rounded-pill me-2" onclick="editarImagen(${contadorID})" title="Editar">
-            <i class="bi bi-pencil-square"></i> Editar
-          </button>
-          <button class="btn btn-danger btn-sm rounded-pill" onclick="eliminarImagen(${contadorID})" title="Eliminar">
-            <i class="bi bi-trash"></i> Eliminar
-          </button>
-        </td>
-      `;
-      tablaBody.appendChild(nuevaFila);
-      contadorID++;
-
-      mostrarMensaje('success', 'Imagen subida correctamente');
-      form.reset();
-    };
-    reader.readAsDataURL(archivo);
+  imagenes.forEach((imagen) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${imagen.id}</td>
+      <td>${imagen.nombre}</td>
+      <td><img src="../../img/${imagen.archivo}" class="table-img" alt="${imagen.nombre}"></td>
+      <td>
+        <button class="btn btn-edit btn-sm me-2" onclick="confirmarAccionImagen('editar', ${imagen.id})">
+          <i class="bi bi-pencil-fill"></i> Editar
+        </button>
+        <button class="btn btn-delete btn-sm" onclick="confirmarAccionImagen('eliminar', ${imagen.id})">
+          <i class="bi bi-trash-fill"></i> Eliminar
+        </button>
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
-});
 
-// Función eliminar
-function eliminarImagen(id) {
-  confirmarAccion('¿Estás seguro que deseas eliminar esta imagen?', () => {
-    const filas = document.querySelectorAll('#imagenTableBody tr');
-    filas.forEach(fila => {
-      if (fila.cells[0].textContent == id) {
-        fila.remove();
-        mostrarMensaje('success', 'Imagen eliminada');
+}
+
+// Confirmar acción con SweetAlert2 para imágenes
+function confirmarAccionImagen(accion, id) {
+  if (accion === "editar") {
+    Swal.fire({
+      title: "¿Estás seguro de editar esta imagen?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sí, editar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#28a745"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `/pages/admin/forms/form-imagen.html?id=${id}`;
       }
     });
+  } else if (accion === "eliminar") {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar esta imagen?",
+      text: "No podrás revertir esta acción.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#dc3545"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        eliminarImagen(id);
+        Swal.fire("Eliminado!", "La imagen ha sido eliminada.", "success");
+      }
+    });
+  }
+}
+
+// Eliminar imagen por ID
+function eliminarImagen(id) {
+  let imagenes = obtenerImagenes();
+  imagenes = imagenes.filter(img => Number(img.id) !== Number(id));
+  guardarImagenes(imagenes);
+  cargarImagenes();
+}
+
+// Crear nueva imagen desde formulario (ejemplo básico)
+function crearImagen() {
+  const nombreInput = document.getElementById("nombre");
+  const archivoInput = document.getElementById("archivo");
+
+  if (!nombreInput || !archivoInput) {
+    Swal.fire("Error", "No se encontraron los campos del formulario.", "error");
+    return;
+  }
+
+  if (!nombreInput.value.trim() || !archivoInput.value.trim()) {
+    Swal.fire("Error", "Por favor completa todos los campos.", "error");
+    return;
+  }
+
+  const imagenes = obtenerImagenes();
+  const nuevoId = obtenerSiguienteIdImagen();
+
+  const nuevoImagen = {
+    id: nuevoId,
+    nombre: nombreInput.value.trim(),
+    archivo: archivoInput.value.trim(),
+  };
+
+  imagenes.push(nuevoImagen);
+  guardarImagenes(imagenes);
+
+  Swal.fire({
+    icon: "success",
+    title: "¡Imagen creada!",
+    text: "La imagen se creó correctamente.",
+    timer: 2000,
+    showConfirmButton: false,
+    timerProgressBar: true,
+  }).then(() => {
+    window.location.href = "/pages/admin/lists/list-imagen.html";
   });
 }
 
-// Función editar con modal (ejemplo simple)
-function editarImagen(id) {
-  Swal.fire({
-    title: 'Editar Nombre de Imagen',
-    input: 'text',
-    inputLabel: 'Nuevo nombre',
-    inputPlaceholder: 'Ej: Fiesta rosa',
-    showCancelButton: true,
-    confirmButtonText: 'Guardar',
-    confirmButtonColor: '#28a745',
-    cancelButtonColor: '#f06292',
-    inputValidator: (value) => {
-      if (!value) return 'Debes ingresar un nombre';
-      if (!validarTextoSinSimbolos(value)) return 'Nombre inválido. Sin símbolos.';
-    }
-  }).then(result => {
-    if (result.isConfirmed) {
-      const nuevoNombre = result.value;
-      const filas = document.querySelectorAll('#imagenTableBody tr');
-      filas.forEach(fila => {
-        if (fila.cells[0].textContent == id) {
-          fila.cells[1].textContent = nuevoNombre;
-          mostrarMensaje('success', 'Nombre editado con éxito');
-        }
-      });
-    }
-  });
-}
+// Al cargar la página, inicializar y cargar la tabla de imágenes
+window.addEventListener("DOMContentLoaded", () => {
+  inicializarLocalStorageImagenes();
+  cargarImagenes();
+});
