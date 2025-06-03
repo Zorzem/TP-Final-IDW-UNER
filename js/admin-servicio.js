@@ -3,7 +3,7 @@
 // Clave única para los servicios
 const SERVICIOS_STORAGE_KEY = "servicios_data";
 
-// Inicializa el almacenamiento local con datos de ejemplo si está vacío
+// Inicializa el localStorage con datos de ejemplo si está vacío
 function inicializarLocalStorageServicios() {
     if (!localStorage.getItem(SERVICIOS_STORAGE_KEY)) {
         const serviciosIniciales = [
@@ -81,7 +81,6 @@ function eliminarServicio(id) {
             listarServicios();
             mostrarMensaje('success', 'Servicio eliminado con éxito');
         } else {
-            // Si se cancela la eliminación
             Swal.fire(
                 'Cancelado',
                 'El servicio no fue eliminado.',
@@ -225,7 +224,7 @@ function cargarVistaServicios(categoria, accion, id = null) {
 function renderizarServicios() {
     const servicios = obtenerServicios();
     const container = document.getElementById('servicios-container');
-    container.innerHTML = ''; // Limpiar antes de renderizar
+    container.innerHTML = ''; 
     
     // Generar una card por cada servicio
     servicios.forEach(servicio => {

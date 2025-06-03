@@ -3,7 +3,7 @@
 // Clave única para identificar los datos en el localStorage
 const STORAGE_KEY = "salones_data";
 
-// Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
+// Inicializa el localStorage con datos de ejemplo si está vacío
 function inicializarLocalStorageSalones() {
     if (!localStorage.getItem(STORAGE_KEY)) {
         const salonesIniciales = [
@@ -39,7 +39,7 @@ function mostrarMensaje(tipo, mensaje) {
                 icon: 'success',
                 title: '¡Éxito!',
                 text: mensaje,
-                timer: 2000, // Desaparece después de 2 segundos
+                timer: 2000,
                 showConfirmButton: false
             });
             break;
@@ -48,7 +48,7 @@ function mostrarMensaje(tipo, mensaje) {
                 icon: 'error',
                 title: '¡Error!',
                 text: mensaje,
-                timer: 2000, // Desaparece después de 2 segundos
+                timer: 2000, 
                 showConfirmButton: false
             });
             break;
@@ -57,7 +57,7 @@ function mostrarMensaje(tipo, mensaje) {
                 icon: 'warning',
                 title: '¡Advertencia!',
                 text: mensaje,
-                timer: 2000, // Desaparece después de 2 segundos
+                timer: 2000,
                 showConfirmButton: false
             });
             break;
@@ -86,12 +86,6 @@ function mostrarMensaje(tipo, mensaje) {
 
 
 
-
-
-
-
-
-
 /* ———————————————————————————————————————————————————————————————————————————————————— */
 
 // ========== CRUD ==========
@@ -108,7 +102,7 @@ function crearSalon(nombre, capacidad, precio, imagen) {
     };
     salones.push(nuevoSalon);
     guardarSalones(salones);
-    mostrarMensaje('success', 'Salón creado correctamente'); // Usamos SweetAlert2
+    mostrarMensaje('success', 'Salón creado correctamente'); 
     return nuevoSalon;
 }
 
@@ -124,10 +118,10 @@ function actualizarSalon(id, nombre, capacidad, precio, imagen) {
             imagen
         };
         guardarSalones(salones);
-        mostrarMensaje('success', 'Salón actualizado correctamente'); // Usamos SweetAlert2 para el éxito
+        mostrarMensaje('success', 'Salón actualizado correctamente');
         return salones[index];
     }
-    mostrarMensaje('error', 'Hubo un error al actualizar el salón'); // SweetAlert2 en caso de error
+    mostrarMensaje('error', 'Hubo un error al actualizar el salón'); 
     return null;
 }
 
@@ -307,10 +301,8 @@ function eliminarSalon(id) {
             const salones = obtenerSalones().filter(salon => salon.id !== id);
             guardarSalones(salones);
             listarSalones();
-            // Mostrar mensaje de éxito con SweetAlert2
             mostrarMensaje('success', 'Salón eliminado con éxito');
         } else {
-            // Si se cancela la eliminación
             Swal.fire(
                 'Cancelado',
                 'El salón no fue eliminado.',
@@ -324,7 +316,7 @@ function eliminarSalon(id) {
 function renderizarSalones() {
     const salones = obtenerSalones();
     const contenedor = document.getElementById("salones-container");
-    contenedor.innerHTML = ""; // Limpiar antes de renderizar
+    contenedor.innerHTML = "";
 
     salones.forEach(salon => {
         contenedor.innerHTML += `
