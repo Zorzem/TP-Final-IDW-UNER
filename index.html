@@ -11,6 +11,11 @@
       integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
       crossorigin="anonymous"
     />
+
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <script type="text/javascript" src="js/admin-salon.js"></script>
+    <script type="text/javascript" src="js/admin-servicio.js"></script>
+    <script type="text/javascript" src="js/admin-imagen.js"></script>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -25,10 +30,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-              <li class="nav-item"><a class="nav-link" href="#salones">Catálogo</a></li>
+              <li class="nav-item"><a class="nav-link current-page" href="#">Inicio</a></li>
               <li class="nav-item"><a class="nav-link" href="pages/institucional.html">Institucional</a></li>
               <li class="nav-item"><a class="nav-link" href="pages/contacto.html">Contacto</a></li>
+              <a href="pages/admin/menu.html" class="btn btn-outline-dark admin">ADMIN</a>
             </ul>
           </div>
         </div>
@@ -60,106 +65,20 @@
 
     <section class="salones" id="salones">
       <h2>Salones Disponibles</h2>
+
       <div class="container py-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-            <div class="card h-100 shadow">
-              <img src="img/salon1.jpg" class="card-img-top border border-2 border-white" alt="Producto 1" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 1</h5>
-                <p class="card-text">Capacidad: 30 personas</p>
-                <p class="fw-bold">$1500</p>
-              </div>
-            </div>
-          </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="salones-container">
+           <!-- Los salones se cargan aquí dinámicamente -->
+        </div>
+      </div>
+    </section>
 
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon2.jpg" class="card-img-top border border-2 border-white" alt="Producto 2" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 2</h5>
-                <p class="card-text">Capacidad: 50 personas.</p>
-                <p class="fw-bold">$2500</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon3.jpg" class="card-img-top border border-2 border-white" alt="Producto 3" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 3</h5>
-                <p class="card-text">Capacidad: 40 personas</p>
-                <p class="fw-bold">$2000</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon4.jpg" class="card-img-top border border-2 border-white" alt="Producto 4" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 4</h5>
-                <p class="card-text">Capacidad: 60 personas.</p>
-                <p class="fw-bold">$3000</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon5.jpg" class="card-img-top border border-2 border-white" alt="Producto 4" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 5</h5>
-                <p class="card-text">Capacidad: 45 personas</p>
-                <p class="fw-bold">$2200</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon6.jpg" class="card-img-top border border-2 border-white" alt="Producto 4" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 6</h5>
-                <p class="card-text">Capacidad: 70 personas</p>
-                <p class="fw-bold">$3500</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon7.jpg" class="card-img-top border border-2 border-white" alt="Producto 4" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 7</h5>
-                <p class="card-text">Capacidad: 35 personas</p>
-                <p class="fw-bold">$1800</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon8.jpg" class="card-img-top border border-2 border-white" alt="Producto 4" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 8</h5>
-                <p class="card-text">Capacidad: 55 personas</p>
-                <p class="fw-bold">$2800</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card h-100">
-              <img src="img/salon9.jpg" class="card-img-top border border-2 border-white" alt="Producto 4" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 9</h5>
-                <p class="card-text">Capacidad: 65 personas.</p>
-                <p class="fw-bold">$3300</p>
-              </div>
-            </div>
-          </div>
+    <!-- CATÁLOGO DE SERVICIOS -->
+    <section class="servicios" id="servicios">
+      <h2>Servicios Disponibles</h2>
+      <div class="container py-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="servicios-container">
+          <!-- Los servicios se cargan aquí dinámicamente -->
         </div>
       </div>
     </section>
@@ -171,14 +90,6 @@
     </section>
 
     <!-- RESEÑAS -->
-    <!--   <section class="resenas">
-    <h2>Clientes Felices</h2>
-    <div class="resena">
-      <img src="img/cliente1.jpg" alt="Cliente feliz" />
-      <blockquote>"¡Fue el mejor cumpleaños de mi hijo! Todo increíble."</blockquote>
-    </div>
-  </section> -->
-
     <section class="resenas">
       <h2>Clientes Felices</h2>
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -206,6 +117,19 @@
         </a>
       </div>
     </section>
+
+ <!-- GALERIA -->
+
+ <section class="salones" id="galeria">
+  <h2>Galería</h2>
+
+  <div class="container py-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="galeria-container">
+         <!-- Las imagenes se cargan aquí dinámicamente -->
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- FOOTER MEJORADO -->
     <footer class="footer-mejorado">
@@ -243,5 +167,6 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
+
   </body>
 </html>
