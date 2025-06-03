@@ -3,7 +3,7 @@
 // Clave única para identificar los datos en el localStorage
 const STORAGE_KEY = "salones_data";
 
-// Inicializa el localStorage con datos de ejemplo, creando 9 salones de prueba.
+// Inicializa el localStorage con datos de ejemplo si está vacío
 function inicializarLocalStorageSalones() {
     if (!localStorage.getItem(STORAGE_KEY)) {
         const salonesIniciales = [
@@ -31,6 +31,61 @@ function guardarSalones(salones) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(salones));
 }
 
+// Muestra un mensaje de éxito, error o confirmación con SweetAlert2
+function mostrarMensaje(tipo, mensaje) {
+    switch(tipo) {
+        case 'success':
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: mensaje,
+                timer: 2000,
+                showConfirmButton: false
+            });
+            break;
+        case 'error':
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: mensaje,
+                timer: 2000, 
+                showConfirmButton: false
+            });
+            break;
+        case 'warning':
+            Swal.fire({
+                icon: 'warning',
+                title: '¡Advertencia!',
+                text: mensaje,
+                timer: 2000,
+                showConfirmButton: false
+            });
+            break;
+        case 'confirm':
+            // Confirmación de eliminación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: mensaje,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'No',
+                focusCancel: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, ejecutamos la acción de eliminación
+                    eliminarSalon();
+                }
+            });
+            break;
+        default:
+            console.error('Tipo de mensaje no soportado');
+            break;
+    }
+}
+
+
+
 /* ———————————————————————————————————————————————————————————————————————————————————— */
 
 // ========== CRUD ==========
@@ -47,6 +102,7 @@ function crearSalon(nombre, capacidad, precio, imagen) {
     };
     salones.push(nuevoSalon);
     guardarSalones(salones);
+    mostrarMensaje('success', 'Salón creado correctamente'); 
     return nuevoSalon;
 }
 
@@ -62,10 +118,14 @@ function actualizarSalon(id, nombre, capacidad, precio, imagen) {
             imagen
         };
         guardarSalones(salones);
+        mostrarMensaje('success', 'Salón actualizado correctamente');
         return salones[index];
     }
+    mostrarMensaje('error', 'Hubo un error al actualizar el salón'); 
     return null;
 }
+
+
 
 // ========== UI ==========
 function listarSalones() {
@@ -110,61 +170,97 @@ function mostrarFormularioCrear(salon = null) {
     <h3>${esEdicion ? 'Editar' : 'Crear'} Salón</h3>
     <form id="form-salones" class="needs-validation" novalidate>
         <input type="hidden" id="salon-id" value="${esEdicion ? salon.id : ''}">
+        
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" 
-                   value="${esEdicion ? salon.nombre : ''}" required>
-            <div class="invalid-feedback">Por favor ingresa un nombre</div>
+                   value="${esEdicion ? salon.nombre : ''}" required 
+                   pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+">
+            <div class="invalid-feedback">Por favor ingresa un nombre válido (letras, números y espacios).</div>
+            <small class="text-muted">No se deben poner caracteres especiales o símbolos, solo letras (con o sin tilde), números y espacios.</small>
         </div>
+
         <div class="mb-3">
             <label for="capacidad" class="form-label">Capacidad</label>
-            <input type="number" class="form-control" id="capacidad" 
-                   value="${esEdicion ? salon.capacidad : ''}" required min="1">
+            <input type="number" class="form-control" id="capacidad" min="1" max="200"
+                   value="${esEdicion ? salon.capacidad : ''}" required >
             <div class="invalid-feedback">Por favor ingresa la capacidad</div>
+            <small class="text-muted">Capacidad máxima 200 personas.</small>
         </div>
+
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
             <input type="number" step="0.01" class="form-control" id="precio" 
                    value="${esEdicion ? salon.precio : ''}" required min="0.01">
             <div class="invalid-feedback">Por favor ingresa el precio</div>
         </div>
+
         <div class="mb-3">
             <label for="imagen" class="form-label">Nombre de Imagen</label>
             <input type="text" class="form-control" id="imagen" 
-                   value="${esEdicion ? salon.imagen : ''}" required>
+                   value="${esEdicion ? salon.imagen : ''}" required 
+                   pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+\.[a-zA-Z]{3,4}">
             <div class="invalid-feedback">Por favor ingresa el nombre de la imagen</div>
         </div>
+
         <button type="submit" class="btn btn-primary">${esEdicion ? 'Actualizar' : 'Guardar'}</button>
     </form>`;
-    
-    document.getElementById("contenido-admin").innerHTML = formHtml;
-    
+
+    const contenidoAdmin = document.getElementById("contenido-admin");
+    if (contenidoAdmin) {
+        contenidoAdmin.innerHTML = formHtml;
+    }
+
     const form = document.getElementById("form-salones");
+    
+    // Evento de submit
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        if (!form.checkValidity()) {
-            e.stopPropagation();
-            form.classList.add('was-validated');
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const imagen = document.getElementById('imagen').value.trim();
+
+        const capacidad = document.getElementById('capacidad').value;
+        const capacidad_num = parseInt(capacidad);
+        
+        // Validación para nombre (permite letras, números, espacios y acentos)
+        const nombreRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!nombreRegex.test(nombre)) {
+            mostrarMensaje('error', 'Nombre inválido. Use letras, números y espacios');
             return;
         }
         
+        // Validación para imagen (permite letras, números, espacios, guiones y extensión)
+        const imagenRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s\-]+\.[a-zA-Z]{3,4}$/;
+        if (!imagenRegex.test(imagen)) {
+            mostrarMensaje('error', 'Formato de imagen inválido. Ejemplo: salon-fiesta.jpg');
+            return;
+        }
+
+        if (isNaN(capacidad_num) || capacidad_num < 1 || capacidad_num > 200) {
+            mostrarMensaje('error', 'La capacidad debe ser un número entre 1 y 200');
+            return;
+        } 
+
         const id = document.getElementById('salon-id').value;
-        const nombre = document.getElementById('nombre').value;
-        const capacidad = document.getElementById('capacidad').value;
-        const precio = document.getElementById('precio').value;
-        const imagen = document.getElementById('imagen').value;
         
+        const precio = document.getElementById('precio').value;
+
         if (esEdicion) {
             actualizarSalon(parseInt(id), nombre, capacidad, precio, imagen);
-            alert("Salón actualizado correctamente");
+            mostrarMensaje('success', 'Salón actualizado correctamente');
         } else {
             crearSalon(nombre, capacidad, precio, imagen);
-            alert("Salón creado correctamente");
+            mostrarMensaje('success', 'Salón creado correctamente'); 
         }
-        
+
+
         listarSalones();
     });
+
 }
+
+
 
 function mostrarFormularioEditar(id) {
     const salones = obtenerSalones();
@@ -191,18 +287,36 @@ function cargarVista(categoria, accion, id = null) {
 }
 
 function eliminarSalon(id) {
-    if (confirm("Deseas eliminar este salón?")) {
-        const salones = obtenerSalones().filter(salon => salon.id !== id);
-        guardarSalones(salones);
-        listarSalones();
-        alert("Salón eliminado.");
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡Este salón será eliminado permanentemente!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Eliminar el salón
+            const salones = obtenerSalones().filter(salon => salon.id !== id);
+            guardarSalones(salones);
+            listarSalones();
+            mostrarMensaje('success', 'Salón eliminado con éxito');
+        } else {
+            Swal.fire(
+                'Cancelado',
+                'El salón no fue eliminado.',
+                'error'
+            );
+        }
+    });
 }
+
 
 function renderizarSalones() {
     const salones = obtenerSalones();
     const contenedor = document.getElementById("salones-container");
-    contenedor.innerHTML = ""; // Limpiar antes de renderizar
+    contenedor.innerHTML = "";
 
     salones.forEach(salon => {
         contenedor.innerHTML += `
@@ -226,7 +340,9 @@ function renderizarSalones() {
 // Inicializa localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     inicializarLocalStorageSalones();
-    renderizarSalones(); 
+    if (document.getElementById("salones-container")) {
+        renderizarSalones();
+    }
 });
 
 // Hacer funciones accesibles globalmente

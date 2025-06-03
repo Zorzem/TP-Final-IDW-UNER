@@ -69,3 +69,34 @@ En esta segunda etapa se profundiza la estructura del sitio web implementando bu
 - **institucional.html:** rediseñada usando etiquetas semánticas (`section`, `article`) y clases de Bootstrap.
 - **contacto.html:** incluye formulario estático estilizado con Bootstrap y maquetado responsive.
 - **style.css:** reducido y reorganizado para trabajar en conjunto con las clases de Bootstrap, manteniendo solo los estilos personalizados necesarios.
+
+---
+
+## Tercera Entrega – Etapa 3
+
+### Objetivos de esta entrega
+
+En esta etapa se desarrollaron funcionalidades dinámicas de administración para los salones de eventos, incorporando lógica en JavaScript y almacenamiento permanente usando la API de `LocalStorage`. Los objetivos fueron:
+
+- Implementar operaciones de **Crear, Leer, Modificar y Eliminar (CRUD)** para los salones, servicios e imágenes.
+- Persistir datos en el navegador utilizando `LocalStorage`.
+- Mostrar los salones, servicios e imágenes en una **tabla HTML** dinámica.
+- Usar **formularios HTML apropiados** para la creación y edición.
+- Simular la carga de imágenes, convirtiéndolas a **Base64** para su almacenamiento local.
+- Actualizar el catálogo para mostrar los datos desde `LocalStorage` en lugar de estar codificados manualmente.
+
+---
+
+### Funcionalidades implementadas
+
+- Se crearon los archivos `admin-salon.js`, `admin-servicio.js` y `admin-imagen.js` cada una con una constante `KEY` que define los valores por defecto. Estos archivos se importan en el script principal para inicializar el `LocalStorage` si no hay datos guardados previamente.
+- Los salones, servicios e imágenes se administran desde una sección `ADMIN` que cuenta con una tabla HTML donde pueden:
+  - **Visualizarse** con sus datos básicos e imagen miniatura.
+  - **Crearse** desde un formulario dinámico.
+  - **Editarse**, cargando los datos al formulario.
+  - **Eliminarse**, con confirmación del usuario.
+- Las imágenes cargadas mediante un campo `input[type="file"]` se convierten a Base64 utilizando `FileReader`, y se guardan como string dentro del objeto del salón en `LocalStorage`.
+- Todos los campos del formulario fueron validados según el tipo de dato correspondiente (texto, número, archivo, etc.).
+- Tanto el catálogo de salones como el de servicios y galeria de imágenes dentro del archivo `index.html` fueron modificados para **cargar dinámicamente los datos desde `LocalStorage`**, generando cada tarjeta de manera automática con los datos almacenados.
+
+---

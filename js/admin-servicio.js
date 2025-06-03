@@ -3,7 +3,7 @@
 // Clave única para los servicios
 const SERVICIOS_STORAGE_KEY = "servicios_data";
 
-// Inicializa el almacenamiento local con datos de ejemplo si está vacío
+// Inicializa el localStorage con datos de ejemplo si está vacío
 function inicializarLocalStorageServicios() {
     if (!localStorage.getItem(SERVICIOS_STORAGE_KEY)) {
         const serviciosIniciales = [
@@ -65,12 +65,29 @@ function actualizarServicio(id, nombre, tiempo_hs, precio, imagen) {
 
 // Elimina un servicio
 function eliminarServicio(id) {
-    if (confirm("¿Estás seguro de eliminar este servicio?")) {
-        const servicios = obtenerServicios().filter(servicio => servicio.id !== id);
-        guardarServicios(servicios);
-        listarServicios();
-        alert("Servicio eliminado correctamente");
-    }
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡Este servicio será eliminado permanentemente!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'No, cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Eliminar el servicio
+            const servicios = obtenerServicios().filter(servicio => servicio.id !== id);
+            guardarServicios(servicios);
+            listarServicios();
+            mostrarMensaje('success', 'Servicio eliminado con éxito');
+        } else {
+            Swal.fire(
+                'Cancelado',
+                'El servicio no fue eliminado.',
+                'error'
+            );
+        }
+    });
 }
 
 // ========== UI ==========
@@ -165,10 +182,10 @@ function mostrarFormularioCrearServicio(servicio = null) {
         
         if (esEdicion) {
             actualizarServicio(parseInt(id), nombre, tiempo_hs, precio, imagen);
-            alert("Servicio actualizado correctamente");
+             mostrarMensaje('success', 'Servicio actualizado correctamente');
         } else {
             crearServicio(nombre, tiempo_hs, precio, imagen);
-            alert("Servicio creado correctamente");
+             mostrarMensaje('success', 'Servicio creado correctamente'); 
         }
         
         listarServicios();
@@ -207,7 +224,7 @@ function cargarVistaServicios(categoria, accion, id = null) {
 function renderizarServicios() {
     const servicios = obtenerServicios();
     const container = document.getElementById('servicios-container');
-    container.innerHTML = ''; // Limpiar antes de renderizar
+    container.innerHTML = ''; 
     
     // Generar una card por cada servicio
     servicios.forEach(servicio => {
@@ -233,7 +250,9 @@ function renderizarServicios() {
 // Inicializa localStorageServicios al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     inicializarLocalStorageServicios();
-    renderizarServicios();
+    if (document.getElementById("servicios-container")) {
+        renderizarServicios();
+    }
 });
 
 // Hacer funciones accesibles globalmente
