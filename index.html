@@ -12,9 +12,10 @@
       crossorigin="anonymous"
     />
 
-    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <script type="text/javascript" src="js/admin-salon.js"></script>
     <script type="text/javascript" src="js/admin-servicio.js"></script>
+    <script type="text/javascript" src="js/admin-imagen.js"></script>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -67,16 +68,7 @@
 
       <div class="container py-4">
         <div class="row row-cols-1 row-cols-md-3 g-4" id="salones-container">
-          <!-- <div class="col">
-            <div class="card h-100 shadow">
-              <img src="img/salon1.jpg" class="card-img-top border border-2 border-white" alt="Producto 1" />
-              <div class="card-body">
-                <h5 class="card-title">Salón Fiesta 1</h5>
-                <p class="card-text">Capacidad: 30 personas</p>
-                <p class="fw-bold">$1500</p>
-              </div>
-            </div>
-          </div> -->
+           <!-- Los salones se cargan aquí dinámicamente -->
         </div>
       </div>
     </section>
@@ -86,7 +78,7 @@
       <h2>Servicios Disponibles</h2>
       <div class="container py-4">
         <div class="row row-cols-1 row-cols-md-3 g-4" id="servicios-container">
-          <!-- Las cards se generarán aquí dinámicamente -->
+          <!-- Los servicios se cargan aquí dinámicamente -->
         </div>
       </div>
     </section>
@@ -125,6 +117,19 @@
         </a>
       </div>
     </section>
+
+ <!-- GALERIA -->
+
+ <section class="salones" id="galeria">
+  <h2>Galería</h2>
+
+  <div class="container py-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="galeria-container">
+         <!-- Las imagenes se cargan aquí dinámicamente -->
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- FOOTER MEJORADO -->
     <footer class="footer-mejorado">
