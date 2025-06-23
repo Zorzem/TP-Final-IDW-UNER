@@ -22,7 +22,7 @@
   <script>
     // redirigir a página de login si no inició sesión
     const token = sessionStorage.getItem("accessToken");
-    console.log("menu.html:\n",token)
+    console.log("menu.html:\n", token)
     if (!token || token === "undefined" || token === "null") {
       window.location.href = "login.html";
     }
@@ -42,6 +42,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="../../index.html">Volver a inicio</a></li>
+            <button class="btn btn-danger ms-2" onclick="borrarLocalStorage()">
+              Borrar localStorage
+            </button>
             <button class="btn btn-danger ms-2" id="cerrar-sesion">
               Cerrar sesión
             </button>
@@ -142,6 +145,26 @@
         window.location.href = "../../index.html";
       });
     });
+
+    // para revertir los cambios del localStorage fácilmente
+    function borrarLocalStorage() {
+
+      Swal.fire({
+        title: "Borrar el localStorage?",
+        text: "Esta acción eliminará todos los datos del localStorage y no se puede deshacer",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, borrar",
+        cancelButtonText: "Cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.clear()
+        }
+      });
+
+
+    }
+
   </script>
 
 </body>
