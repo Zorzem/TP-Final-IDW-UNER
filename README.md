@@ -100,3 +100,49 @@ En esta etapa se desarrollaron funcionalidades dinámicas de administración par
 - Tanto el catálogo de salones como el de servicios y galeria de imágenes dentro del archivo `index.html` fueron modificados para **cargar dinámicamente los datos desde `LocalStorage`**, generando cada tarjeta de manera automática con los datos almacenados.
 
 ---
+
+## Cuarta Entrega – Etapa 4
+
+### Objetivos de esta entrega
+
+Esta etapa tiene como objetivo incorporar una **autenticación real vía API REST pública**, restringir el acceso al panel administrativo y completar el sistema de administración con todas las funcionalidades necesarias. Los objetivos fueron:
+
+- Implementar la funcionalidad de **inicio de sesión de usuario** utilizando la API REST pública de [DummyJSON](https://dummyjson.com).
+- Restringir el acceso al panel de administración a usuarios autenticados.
+- Persistir el **accessToken** en `sessionStorage` para identificar la sesión activa.
+- Incorporar una nueva página dentro del panel de administración que muestre los **usuarios registrados** en la API pública.
+- Completar las funcionalidades **CRUD** para todas las entidades del sistema (salones, servicios, imágenes y presupuestos).
+- Implementar la funcionalidad de **presupuestos** como una nueva entidad administrable.
+
+### Funcionalidades implementadas
+
+- Se creó una nueva página `login.html` con un formulario de autenticación de usuario.
+  - El formulario envía los datos a `https://dummyjson.com/auth/login` mediante `fetch`.
+  - Si las credenciales son válidas, se guarda el `accessToken` en `sessionStorage`.
+  - En caso de error, se muestra un mensaje adecuado al usuario.
+  - **Ejemplo de usuario válido:**
+    - Usuario: `emilys`
+    - Contraseña: `emilyspass`
+
+- Se implementó un **control de acceso** al panel de administración:
+  - Si el usuario no está logueado (no hay token en `sessionStorage`), se redirige automáticamente a `login.html`.
+  - El token se borra al cerrar sesión o al eliminarlo manualmente.
+
+- Se agregó una nueva página `admin-usuarios.html` que lista todos los usuarios públicos desde `https://dummyjson.com/users`.
+  - Los datos sensibles fueron omitidos (contraseñas, tokens, etc.).
+  - La vista es únicamente de **lectura** (listado simple).
+
+- Se implementó una nueva sección para la **administración de presupuestos**:
+  - CRUD completo: **Crear, Leer, Editar y Eliminar presupuestos**.
+  - Los datos se almacenan de forma persistente utilizando `localStorage`.
+  - Se incluyen campos como nombre del cliente, fecha, servicios seleccionados, y total estimado.
+  - Validación completa de campos y experiencia de usuario amigable.
+
+- El panel de administración ahora ofrece acceso completo y funcional a:
+  - **Salones**
+  - **Servicios**
+  - **Imágenes**
+  - **Presupuestos**
+  - **Usuarios registrados (API pública)**
+
+---
