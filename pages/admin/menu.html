@@ -136,7 +136,25 @@
                 </div>
               </div>
             </div>
-
+          <!-- PRESUPUESTOS MENU  -->
+          <div class="accordion" id="sidebarMenuPresupuestos">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="presupuestosHeading">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#presupuestosCollapse">
+                  <i class="bi bi-balloon me-2"></i>Presupuestos
+                </button>
+              </h2>
+              <!-- PRESUPUESTOS LISTA -->
+              <div id="serviciosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuPresupuestos">
+                <div class="accordion-body list-group">
+                  <button class="list-group-item list-group-item-action"
+                    onclick="cargarVistaPresupuestos('presupuestos', 'listar')">Listar</button>
+                  <button class="list-group-item list-group-item-action"
+                    onclick="cargarVistaPresupuestos('presupuestos', 'crear')">Crear</button>
+                </div>
+              </div>
+            </div>
           </div>
       </aside>
 
