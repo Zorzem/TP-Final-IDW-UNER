@@ -37,7 +37,7 @@ document.querySelector("#loginForm").addEventListener("submit", async function (
 
     Swal.fire({
         icon: "success",
-        title: "Inicio de sesión exitoso",
+        title: "Inicio de sesión exitoso, serás redirigido.",
         timer: 1500,
         showConfirmButton: false
     });
