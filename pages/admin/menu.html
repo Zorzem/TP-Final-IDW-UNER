@@ -61,101 +61,95 @@
     <div class="row">
       <h2 id="usuario-nombre" class="text-center mb-4">Menu de Administración</h2>
 
-      <!-- Sidebar -->
-      <!--SALONES-->
       <aside class="col-md-3 bg-light p-3 shadow-sm border">
-        <div class="accordion" id="sidebarMenuSalones">
-          <!-- SALONES -->
+        <!-- SALONES -->
+        <div class="accordion mb-2" id="sidebarMenuSalones">
           <div class="accordion-item">
             <h2 class="accordion-header" id="salonesHeading">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#salonesCollapse">
-                <i class="bi bi-houses me-2"></i>
-                Salones
+                <i class="bi bi-houses me-2"></i>Salones
               </button>
             </h2>
-            <div id="salonesCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+            <div id="salonesCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuSalones">
               <div class="accordion-body list-group">
-                <button class="list-group-item list-group-item-action"
-                  onclick="cargarVista('salones', 'listar')">Listar</button>
-                <button class="list-group-item list-group-item-action"
-                  onclick="cargarVista('salones', 'crear')">Crear</button>
+                <button class="list-group-item list-group-item-action" onclick="cargarVista('salones', 'listar')">Listar</button>
+                <button class="list-group-item list-group-item-action" onclick="cargarVista('salones', 'crear')">Crear</button>
               </div>
             </div>
           </div>
-          <!-- Sidebar -->
-          <!-- SERVICIOS MENU  -->
-          <div class="accordion" id="sidebarMenuServicios">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="serviciosHeading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#serviciosCollapse">
-                  <i class="bi bi-balloon me-2"></i>Servicios
-                </button>
-              </h2>
-              <!-- SERVICIOS LISTA -->
-              <div id="serviciosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuServicios">
-                <div class="accordion-body list-group">
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVistaServicios('servicios', 'listar')">Listar</button>
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVistaServicios('servicios', 'crear')">Crear</button>
-                </div>
-              </div>
-            </div>
+        </div>
 
-            <!-- IMÁGENES -->
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="imagenesHeading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#imagenesCollapse">
-                  <i class="bi bi-image me-2"></i>Imágenes
-                </button>
-              </h2>
-              <div id="imagenesCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
-                <div class="accordion-body list-group">
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVista('imagenes', 'listar')">Listar</button>
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVista('imagenes', 'crear')">Crear</button>
-                </div>
-              </div>
-            </div>
-            <!-- USUARIOS -->
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="usuariosHeading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#usuariosCollapse">
-                  <i class="bi bi-people me-2"></i>Usuarios
-                </button>
-              </h2>
-              <div id="usuariosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
-                <div class="accordion-body list-group">
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVista('usuarios', 'listar')">Listar Usuarios</button>
-                </div>
-              </div>
-            </div>
-          <!-- PRESUPUESTOS MENU  -->
-          <div class="accordion" id="sidebarMenuPresupuestos">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="presupuestosHeading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#presupuestosCollapse">
-                  <i class="bi bi-balloon me-2"></i>Presupuestos
-                </button>
-              </h2>
-              <!-- PRESUPUESTOS LISTA -->
-              <div id="serviciosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuPresupuestos">
-                <div class="accordion-body list-group">
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVistaPresupuestos('presupuestos', 'listar')">Listar</button>
-                  <button class="list-group-item list-group-item-action"
-                    onclick="cargarVistaPresupuestos('presupuestos', 'crear')">Crear</button>
-                </div>
+        <!-- SERVICIOS -->
+        <div class="accordion mb-2" id="sidebarMenuServicios">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="serviciosHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#serviciosCollapse">
+                <i class="bi bi-balloon me-2"></i>Servicios
+              </button>
+            </h2>
+            <div id="serviciosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuServicios">
+              <div class="accordion-body list-group">
+                <button class="list-group-item list-group-item-action" onclick="cargarVistaServicios('servicios', 'listar')">Listar</button>
+                <button class="list-group-item list-group-item-action" onclick="cargarVistaServicios('servicios', 'crear')">Crear</button>
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- IMÁGENES -->
+        <div class="accordion mb-2" id="sidebarMenuImagenes">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="imagenesHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#imagenesCollapse">
+                <i class="bi bi-image me-2"></i>Imágenes
+              </button>
+            </h2>
+            <div id="imagenesCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuImagenes">
+              <div class="accordion-body list-group">
+                <button class="list-group-item list-group-item-action" onclick="cargarVista('imagenes', 'listar')">Listar</button>
+                <button class="list-group-item list-group-item-action" onclick="cargarVista('imagenes', 'crear')">Crear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- USUARIOS -->
+        <div class="accordion mb-2" id="sidebarMenuUsuarios">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="usuariosHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#usuariosCollapse">
+                <i class="bi bi-people me-2"></i>Usuarios
+              </button>
+            </h2>
+            <div id="usuariosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuUsuarios">
+              <div class="accordion-body list-group">
+                <button class="list-group-item list-group-item-action" onclick="cargarVista('usuarios', 'listar')">Listar Usuarios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRESUPUESTOS -->
+        <div class="accordion mb-2" id="sidebarMenuPresupuestos">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="presupuestosHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#presupuestosCollapse">
+                <i class="bi bi-balloon me-2"></i>Presupuestos
+              </button>
+            </h2>
+            <div id="presupuestosCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarMenuPresupuestos">
+              <div class="accordion-body list-group">
+                <button class="list-group-item list-group-item-action" onclick="cargarVistaPresupuestos('presupuestos', 'listar')">Listar</button>
+                <button class="list-group-item list-group-item-action" onclick="cargarVistaPresupuestos('presupuestos', 'crear')">Crear</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </aside>
 
       <!-- Contenido dinámico -->
