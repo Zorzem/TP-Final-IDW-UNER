@@ -105,7 +105,7 @@ function crearPresupuesto(cliente, email, telefono, evento, fecha, invitados, sa
         salonId: parseInt(salonId),
         servicios: servicios.map(s => parseInt(s)),
         total: parseFloat(total),
-        estado, // pendiente | aprobado | rechazado
+        estado: "pendiente", // pendiente | aprobado | rechazado
         notas
     };
     presupuestos.push(nuevoPresupuesto);
@@ -184,7 +184,7 @@ function listarPresupuestos() {
             <td>${presupuesto.estado}</td>
             <td>${presupuesto.notas || 'N/A'}</td>
             <td>
-                <button class="btn btn-sm btn-warning" onclick="cargarVista('presupuestos', 'editar', ${presupuesto.id})">Editar</button>
+                <button class="btn btn-sm btn-warning" onclick="cargarVistaPresupuesto('presupuestos', 'editar', ${presupuesto.id})">Editar</button>
                 <button class="btn btn-sm btn-danger" onclick="eliminarPresupuesto(${presupuesto.id})">Eliminar</button>
             </td>
         </tr>`;
@@ -237,7 +237,7 @@ function mostrarFormularioCrear(presupuesto = null) {
     <div class="mb-3">
         <label for="fecha" class="form-label">Fecha del Evento</label>
         <input type="date" class="form-control" id="fecha"
-                value="${esEdicion ? presupuesto.fecha : ''}" required>
+                value="${esEdicion ? presupuesto.fecha : new Date().toISOString().split('T')[0]}" required>
         <div class="invalid-feedback">Por favor ingresa una fecha válida.</div>
         <small class="text-muted">Formato: AAAA-MM-DD</small>
     </div>
@@ -273,13 +273,11 @@ function mostrarFormularioCrear(presupuesto = null) {
     <div class="mb-3">
         <label for="total" class="form-label">Total Estimado</label>
         <input type="number" step="0.01" class="form-control" id="total"
-                value="${esEdicion ? presupuesto.total.toFixed(2) : ''}" required min="0.01">
-        <div class="invalid-feedback">Por favor ingresa un total válido.</div>
-        <small class="text-muted">El total debe ser un número positivo.</small>
+                value="${esEdicion ? presupuesto.total.toFixed(2) : ''}" readonly disabled>
     </div>
     <div class="mb-3">
         <label for="estado" class="form-label">Estado del Presupuesto</label>
-        <select class="form-select" id="estado" required>
+        <select class="form-select" id="estado" required ${esEdicion ? '' : 'disabled'}>
             <option value="pendiente" ${esEdicion && presupuesto.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
             <option value="aprobado" ${esEdicion && presupuesto.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
             <option value="rechazado" ${esEdicion && presupuesto.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
@@ -327,27 +325,50 @@ function mostrarFormularioCrear(presupuesto = null) {
             return;
         }
 
-        if (isNaN(parseFloat(total)) || parseFloat(total) <= 0) {
-            mostrarMensaje('error', 'El total debe ser un número positivo');
-            return;
-        }
-
         const id = document.getElementById('presupuesto-id').value;
 
         if (esEdicion) {
             actualizarPresupuesto(parseInt(id), cliente, email, telefono, evento, fecha, invitados, salonId, serviciosSeleccionados, total, estado, notas);
             mostrarMensaje('success', 'Presupuesto actualizado correctamente');
         } else {
-            crearPresupuesto(cliente, email, telefono, evento, fecha, invitados, salon, Id, serviciosSeleccionados, total, estado, notas);
+            crearPresupuesto(cliente, email, telefono, evento, fecha, invitados, salonId, serviciosSeleccionados, total, estado, notas);
             mostrarMensaje('success', 'Presupuesto creado correctamente');
         }
         listarPresupuestos();
     });
+
+  function calcularTotal() {
+    const salonId = parseInt(document.getElementById('salon').value);
+    const serviciosSeleccionados = Array.from(document.getElementById('servicios').selectedOptions).map(option => parseInt(option.value));
+
+    let totalSalon = 0;
+    let totalServicios = 0;
+
+    const salon = obtenerSalones().find(s => s.id === salonId);
+    if (salon) {
+        totalSalon = salon.precio;
+    }
+
+    const servicios = obtenerServicios().filter(s => serviciosSeleccionados.includes(s.id));
+    totalServicios = servicios.reduce((acc, s) => acc + s.precio, 0);
+
+    const total = totalSalon + totalServicios;
+    document.getElementById('total').value = total.toFixed(2);
+  }
+
+  // Agregar eventos para actualizar el total automáticamente
+  document.getElementById('salon').addEventListener('change', calcularTotal);
+  document.getElementById('servicios').addEventListener('change', calcularTotal);
+
+  // Calcular total al cargar (si es creación, no edición)
+  if (!esEdicion) {
+      calcularTotal();
+  }
 }
 
 function mostrarFormularioEditar(id) {
     const presupuestos = obtenerPresupuestos();
-    const presupuesto = presupuestos.find(p => p.id === id);
+    const presupuesto = presupuestos.find(p => p.id === parseInt(id));
     if (presupuesto) {
         mostrarFormularioCrear(presupuesto);
     } else {
@@ -357,7 +378,7 @@ function mostrarFormularioEditar(id) {
 }
 
 // ========== GLOBAL ==========
-function cargarVista(categoria, accion, id = null) {
+function cargarVistaPresupuesto(categoria, accion, id = null) {
     if (categoria === 'presupuestos') {
         if (accion === 'listar') {
             listarPresupuestos();
@@ -416,7 +437,7 @@ function renderizarPresupuestos() {
                     <p class="fw-bold">Total: $${presupuesto.total.toFixed(2)}</p>
                     <p class="card-text">Estado: ${presupuesto.estado}</p>
                     <p class="card-text">Notas: ${presupuesto.notas || 'N/A'}</p>
-                    <button class="btn btn-sm btn-warning" onclick="cargarVista('presupuestos', 'editar', ${presupuesto.id})">Editar</button>
+                    <button class="btn btn-sm btn-warning" onclick="cargarVistaPresupuesto('presupuestos', 'editar', ${parseInt(presupuesto.id)})">Editar</button>
                     <button class="btn btn-sm btn-danger" onclick="eliminarPresupuesto(${presupuesto.id})">Eliminar</button>
                 </div>
             </div>
@@ -430,7 +451,7 @@ function renderizarPresupuestos() {
 
 
 // Hacer funciones accesibles globalmente
-window.cargarVista = cargarVista;
+window.cargarVistaPresupuesto = cargarVistaPresupuesto;
 window.eliminarPresupuesto = eliminarPresupuesto;
 window.listarPresupuestos = listarPresupuestos;
         
