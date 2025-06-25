@@ -1,36 +1,56 @@
+
+// Toggle password visibility
+const togglePassword = document.querySelector("#togglePassword");
+const passwordInput = document.querySelector("#password");
+
+togglePassword.addEventListener("click", function () {
+    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    this.classList.toggle("bi-eye");
+    this.classList.toggle("bi-eye-slash");
+});
+
+// Validación de login
 document.querySelector("#loginForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const username = document.querySelector("#username").value.trim();
-  const password = document.querySelector("#password").value.trim();
+    const username = document.querySelector("#username").value.trim();
+    const password = document.querySelector("#password").value.trim();
 
-  try {
+    try {
     const response = await fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+        method: "POST",
+        headers: { 
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
     });
 
-    if (!response.ok) throw new Error("Datos incorrectos");
+    if (!response.ok) throw new Error("Usuario o contraseña incorrectos");
 
     const data = await response.json();
-    // console.dir(data);
 
-    if (!data.accessToken) {
-      throw new Error("Recibido un token inválido");
-    }
-
-    console.log("login.js:\n", data.accessToken);
+    if (!data.accessToken) throw new Error("Token inválido");
 
     sessionStorage.setItem("accessToken", data.accessToken);
     sessionStorage.setItem("username", username);
 
-    window.location.href = "../admin/menu.html";
-  } catch (error) {
     Swal.fire({
-      icon: "error",
-      title: "Error al iniciar sesión",
-      text: error.message,
+        icon: "success",
+        title: "Inicio de sesión exitoso",
+        timer: 1500,
+        showConfirmButton: false
     });
-  }
+
+    setTimeout(() => {
+        window.location.href = "../admin/menu.html";
+    }, 1600);
+
+    } catch (err) {
+    Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: err.message
+    });
+    }
 });
