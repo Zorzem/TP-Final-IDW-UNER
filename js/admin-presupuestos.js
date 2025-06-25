@@ -222,7 +222,7 @@ function listarPresupuestos() {
   document.getElementById("contenido-admin").innerHTML = html;
 }
 
-function mostrarFormularioCrear(presupuesto = null) {
+function mostrarFormularioCrearPresupuesto(presupuesto = null) {
   const esEdicion = presupuesto !== null;
   const formHtml = `
     <h3 class="mb-4">${esEdicion ? "Editar" : "Crear"} Presupuesto</h3>
@@ -328,6 +328,7 @@ function mostrarFormularioCrear(presupuesto = null) {
                   .join("")}
             </select>
             <div class="invalid-feedback">Selecciona al menos un servicio</div>
+            <small class="text-muted">Puedes seleccionar múltiples servicios manteniendo presionada la tecla Ctrl</small>
         </div>
         
         <!-- fila 4: total y estado -->
@@ -487,11 +488,11 @@ function mostrarFormularioCrear(presupuesto = null) {
   calcularTotal();
 }
 
-function mostrarFormularioEditar(id) {
+function mostrarFormularioEditarPresupuesto(id) {
   const presupuestos = obtenerPresupuestos();
   const presupuesto = presupuestos.find((p) => p.id === parseInt(id));
   if (presupuesto) {
-    mostrarFormularioCrear(presupuesto);
+    mostrarFormularioCrearPresupuesto(presupuesto);
   } else {
     alert("Presupuesto no encontrado");
     listarPresupuestos();
@@ -504,9 +505,9 @@ function cargarVistaPresupuesto(categoria, accion, id = null) {
     if (accion === "listar") {
       listarPresupuestos();
     } else if (accion === "crear") {
-      mostrarFormularioCrear();
+      mostrarFormularioCrearPresupuesto();
     } else if (accion === "editar") {
-      mostrarFormularioEditar(id);
+      mostrarFormularioEditarPresupuesto(id);
     }
   }
 }
