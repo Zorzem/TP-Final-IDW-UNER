@@ -32,7 +32,7 @@ function listarUsuarios() {
     })
     .catch((err) => {
       console.error("Error al obtener usuarios:", err);
-      document.getElementById("contenido-admin").innerHTML = "<p>Error al cargar usuarios.</p>";
+      document.getElementById("contenido-admin").innerHTML = "<p>Error al cargar usuarios</p>";
     });
 }
 

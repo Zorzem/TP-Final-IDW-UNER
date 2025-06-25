@@ -523,7 +523,7 @@ textarea {
 }
 
 .newsletter-input-group button:hover {
-  background-color: #2fd9b0;
+  background-color: var(--accent2-color);
 }
 
 .copyright {

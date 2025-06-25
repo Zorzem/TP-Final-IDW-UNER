@@ -1,29 +1,28 @@
-
 // Toggle password visibility
 const togglePassword = document.querySelector("#togglePassword");
 const passwordInput = document.querySelector("#password");
 
 togglePassword.addEventListener("click", function () {
-    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-    passwordInput.setAttribute("type", type);
-    this.classList.toggle("bi-eye");
-    this.classList.toggle("bi-eye-slash");
+  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  passwordInput.setAttribute("type", type);
+  this.classList.toggle("bi-eye");
+  this.classList.toggle("bi-eye-slash");
 });
 
 // Validación de login
 document.querySelector("#loginForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const username = document.querySelector("#username").value.trim();
-    const password = document.querySelector("#password").value.trim();
+  const username = document.querySelector("#username").value.trim();
+  const password = document.querySelector("#password").value.trim();
 
-    try {
+  try {
     const response = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
-        headers: { 
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+      },
+      body: JSON.stringify({ username, password }),
     });
 
     if (!response.ok) throw new Error("Usuario o contraseña incorrectos");
@@ -36,21 +35,21 @@ document.querySelector("#loginForm").addEventListener("submit", async function (
     sessionStorage.setItem("username", username);
 
     Swal.fire({
-        icon: "success",
-        title: "Inicio de sesión exitoso, serás redirigido.",
-        timer: 1500,
-        showConfirmButton: false
+      icon: "success",
+      title: "Inicio de sesión exitoso",
+      text: "Redirigiendo al panel admin...",
+      timer: 3000,
+      showConfirmButton: false,
     });
 
     setTimeout(() => {
-        window.location.href = "../admin/menu.html";
-    }, 1600);
-
-    } catch (err) {
+      window.location.href = "../admin/menu.html";
+    }, 3000);
+  } catch (err) {
     Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message
+      icon: "error",
+      title: "Error",
+      text: err.message,
     });
-    }
+  }
 });
