@@ -25,7 +25,7 @@
   <script>
     // redirigir a página de login si no inició sesión
     const token = sessionStorage.getItem("accessToken");
-    console.log("menu.html:\n", token)
+    /* console.log("menu.html:\n", token) prueba*/
     if (!token || token === "undefined" || token === "null") {
       window.location.href = "login.html";
     }

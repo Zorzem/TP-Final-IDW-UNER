@@ -200,104 +200,146 @@ function listarPresupuestos() {
 function mostrarFormularioCrear(presupuesto = null) {
     const esEdicion = presupuesto !== null;
     const formHtml = `
-    <h3>${esEdicion ? 'Editar' : 'Crear'} Presupuesto</h3>
+    <h3 class="mb-4">${esEdicion ? 'Editar' : 'Crear'} Presupuesto</h3>
     <form id="form-presupuesto" class="needs-validation" novalidate>
-    <input type="hidden" id="presupuesto-id" value="${esEdicion ? presupuesto.id : ''}">
-    <div class="mb-3">
-        <label for="cliente" class="form-label">Cliente</label>
-        <input type="text" class="form-control" id="cliente"
-                value="${esEdicion ? presupuesto.cliente : ''}" required
-                pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+">
-        <div class="invalid-feedback">Por favor ingresa un nombre válido (letras, números y espacios).</div>
-        <small class="text-muted">No se deben poner caracteres especiales o símbolos, solo letras (con o sin tilde), números y espacios.</small>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email"
-                value="${esEdicion ? presupuesto.email : ''}" required>
-        <div class="invalid-feedback">Por favor ingresa un email válido.</div>
-        <small class="text-muted">Formato: ejemplo@dominio.com</small>
-    </div>
-    <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono</label>
-        <input type="tel" class="form-control" id="telefono"
-                value="${esEdicion ? presupuesto.telefono : ''}" required
-                pattern="[0-9]{10}">
-        <div class="invalid-feedback">Por favor ingresa un número de teléfono válido (10 dígitos).</div>
-        <small class="text-muted">Formato: 1234567890</small>
-    </div>
-    <div class="mb-3">
-        <label for="evento" class="form-label">Evento</label>
-        <input type="text" class="form-control" id="evento"
-                value="${esEdicion ? presupuesto.evento : ''}" required
-                pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+">
-        <div class="invalid-feedback">Por favor ingresa un nombre de evento válido (letras, números y espacios).</div>
-        <small class="text-muted">No se deben poner caracteres especiales o símbolos, solo letras (con o sin tilde), números y espacios.</small>
-    </div>
-    <div class="mb-3">
-        <label for="fecha" class="form-label">Fecha del Evento</label>
-        <input type="date" class="form-control" id="fecha"
-                value="${esEdicion ? presupuesto.fecha : new Date().toISOString().split('T')[0]}" required>
-        <div class="invalid-feedback">Por favor ingresa una fecha válida.</div>
-        <small class="text-muted">Formato: AAAA-MM-DD</small>
-    </div>
-    <div class="mb-3">
-        <label for="invitados" class="form-label">Número de Invitados</label>
-        <input type="number" class="form-control" id="invitados"
-                value="${esEdicion ? presupuesto.invitados : ''}" required min="1" max="500">
-        <div class="invalid-feedback">Por favor ingresa un número de invitados válido (1-500).</div>
-        <small class="text-muted">Máximo 500 invitados.</small>
-    </div>
-    <div class="mb-3">
-        <label for="salon" class="form-label">Salón</label>
-        <select class="form-select" id="salon" required>
-            <option value="" disabled ${esEdicion ? '' : 'selected'}>Selecciona un salón</option>
-            ${obtenerSalones().map(salon => `
-            <option value="${salon.id}" ${esEdicion && presupuesto.salonId === salon.id ? 'selected' : ''}>${salon.nombre}</option>
-            `).join('')}
-        </select>
-        <div class="invalid-feedback">Por favor selecciona un salón.</div>
-        <small class="text-muted">Selecciona el salón donde se realizará el evento.</small>
-    </div>
-    <div class="mb-3">
-        <label for="servicios" class="form-label">Servicios Adicionales</label>
-        <select multiple class="form-select" id="servicios" required>
-            <option value="" disabled ${esEdicion ? '' : 'selected'}>Selecciona servicios</option>
-            ${obtenerServicios().map(servicio => `
-            <option value="${servicio.id}" ${esEdicion && presupuesto.servicios.includes(servicio.id) ? 'selected' : ''}>${servicio.nombre} - $${servicio.precio.toFixed(2)}</option>
-            `).join('')}
-        </select>
-        <div class="invalid-feedback">Por favor selecciona al menos un servicio.</div>
-        <small class="text-muted">Puedes seleccionar múltiples servicios manteniendo presionada la tecla Ctrl (o Cmd en Mac).</small>
-    </div>
-    <div class="mb-3">
-        <label for="total" class="form-label">Total Estimado</label>
-        <input type="number" step="0.01" class="form-control" id="total"
-                value="${esEdicion ? presupuesto.total.toFixed(2) : ''}" readonly disabled>
-    </div>
-    <div class="mb-3">
-        <label for="estado" class="form-label">Estado del Presupuesto</label>
-        <select class="form-select" id="estado" required ${esEdicion ? '' : 'disabled'}>
-            <option value="pendiente" ${esEdicion && presupuesto.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
-            <option value="aprobado" ${esEdicion && presupuesto.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
-            <option value="rechazado" ${esEdicion && presupuesto.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
-        </select>
-        <div class="invalid-feedback">Por favor selecciona un estado.</div>
-        <small class="text-muted">Selecciona el estado actual del presupuesto.</small>
-    </div>
-    <div class="mb-3">
-        <label for="notas" class="form-label">Notas Adicionales</label>
-        <textarea class="form-control" id="notas" rows="3">${esEdicion ? presupuesto.notas : ''}</textarea>
-        <div class="invalid-feedback">Por favor ingresa notas adicionales si es necesario.</div>
-        <small class="text-muted">Puedes agregar cualquier información relevante sobre el presupuesto.</small>
-    </div>
-    <button type="submit" class="btn btn-primary">${esEdicion ? 'Actualizar' : 'Guardar'}</button>
+        <input type="hidden" id="presupuesto-id" value="${esEdicion ? presupuesto.id : ''}">
+        
+        <!-- Fila 1: Cliente y Email -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="cliente" class="form-label">Cliente</label>
+                    <input type="text" class="form-control" id="cliente"
+                           value="${esEdicion ? presupuesto.cliente : ''}" required
+                           pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+">
+                    <div class="invalid-feedback">Nombre válido (solo letras, números y espacios)</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email"
+                           value="${esEdicion ? presupuesto.email : ''}" required>
+                    <div class="invalid-feedback">Email válido requerido</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fila 2: Teléfono y Evento -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono"
+                           value="${esEdicion ? presupuesto.telefono : ''}" required
+                           pattern="[0-9]{10}">
+                    <div class="invalid-feedback">10 dígitos requeridos</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="evento" class="form-label">Evento</label>
+                    <input type="text" class="form-control" id="evento"
+                           value="${esEdicion ? presupuesto.evento : ''}" required
+                           pattern="[A-Za-z0-9áéíóúÁÉÍÓÚñÑ\s]+">
+                    <div class="invalid-feedback">Nombre de evento válido requerido</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fila 3: Fecha e Invitados -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="fecha" class="form-label">Fecha del Evento</label>
+                    <input type="date" class="form-control" id="fecha"
+                           value="${esEdicion ? presupuesto.fecha : new Date().toISOString().split('T')[0]}" required>
+                    <div class="invalid-feedback">Fecha válida requerida</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="invitados" class="form-label">Número de Invitados</label>
+                    <input type="number" class="form-control" id="invitados"
+                           value="${esEdicion ? presupuesto.invitados : ''}" required min="1" max="500">
+                    <div class="invalid-feedback">Número válido (1-500) requerido</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Salón -->
+        <div class="mb-3">
+            <label for="salon" class="form-label">Salón</label>
+            <select class="form-select" id="salon" required>
+                <option value="" disabled ${esEdicion ? '' : 'selected'}>Selecciona un salón</option>
+                ${obtenerSalones().map(salon => `
+                <option value="${salon.id}" ${esEdicion && presupuesto.salonId === salon.id ? 'selected' : ''}>
+                    ${salon.nombre} (Cap: ${salon.capacidad}, Precio: $${salon.precio.toFixed(2)})
+                </option>
+                `).join('')}
+            </select>
+            <div class="invalid-feedback">Por favor selecciona un salón</div>
+        </div>
+        
+        <!-- Servicios -->
+        <div class="mb-3">
+            <label for="servicios" class="form-label">Servicios Adicionales</label>
+            <select multiple class="form-select" id="servicios" required>
+                <option value="" disabled ${esEdicion ? '' : 'selected'}>Selecciona servicios</option>
+                ${obtenerServicios().map(servicio => `
+                <option value="${servicio.id}" ${esEdicion && presupuesto.servicios.includes(servicio.id) ? 'selected' : ''}>
+                    ${servicio.nombre} - $${servicio.precio.toFixed(2)}
+                </option>
+                `).join('')}
+            </select>
+            <div class="invalid-feedback">Por favor selecciona al menos un servicio</div>
+        </div>
+        
+        <!-- Fila 4: Total y Estado -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="total" class="form-label">Total Estimado</label>
+                    <input type="number" step="0.01" class="form-control" id="total"
+                           value="${esEdicion ? presupuesto.total.toFixed(2) : '0.00'}" readonly disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado del Presupuesto</label>
+                    <select class="form-select" id="estado" required ${esEdicion ? '' : 'disabled'}>
+                        <option value="pendiente" ${esEdicion && presupuesto.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                        <option value="aprobado" ${esEdicion && presupuesto.estado === 'aprobado' ? 'selected' : ''}>Aprobado</option>
+                        <option value="rechazado" ${esEdicion && presupuesto.estado === 'rechazado' ? 'selected' : ''}>Rechazado</option>
+                    </select>
+                    <div class="invalid-feedback">Por favor selecciona un estado</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notas -->
+        <div class="mb-4">
+            <label for="notas" class="form-label">Notas Adicionales</label>
+            <textarea class="form-control" id="notas" rows="3">${esEdicion ? presupuesto.notas : ''}</textarea>
+        </div>
+        
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-secondary" onclick="listarPresupuestos()">
+                Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">
+                ${esEdicion ? 'Actualizar' : 'Guardar'} Presupuesto
+            </button>
+        </div>
     </form>`;
+    
     const contenidoAdmin = document.getElementById("contenido-admin");
     if (contenidoAdmin) {
         contenidoAdmin.innerHTML = formHtml;
     }
+    
     const form = document.getElementById("form-presupuesto");
+    
     // Evento de submit
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -310,22 +352,22 @@ function mostrarFormularioCrear(presupuesto = null) {
         const invitados = document.getElementById('invitados').value;
         const salonId = parseInt(document.getElementById('salon').value);
         const serviciosSeleccionados = Array.from(document.getElementById('servicios').selectedOptions).map(option => parseInt(option.value));
-        const total = document.getElementById('total').value;
         const estado = document.getElementById('estado').value;
         const notas = document.getElementById('notas').value.trim();
 
         // Validaciones
-        if (!cliente || !email || !telefono || !evento || !fecha || !invitados || !salonId || serviciosSeleccionados.length === 0 || !total) {
+        if (!cliente || !email || !telefono || !evento || !fecha || !invitados || !salonId || serviciosSeleccionados.length === 0) {
             mostrarMensaje('error', 'Por favor completa todos los campos obligatorios');
             return;
         }
 
         if (isNaN(parseInt(invitados)) || parseInt(invitados) < 1 || parseInt(invitados) > 500) {
-            mostrarMensaje('error', 'El número de invitados debe ser un número entre 1 y 500');
+            mostrarMensaje('error', 'El número de invitados debe ser entre 1 y 500');
             return;
         }
 
         const id = document.getElementById('presupuesto-id').value;
+        const total = document.getElementById('total').value;
 
         if (esEdicion) {
             actualizarPresupuesto(parseInt(id), cliente, email, telefono, evento, fecha, invitados, salonId, serviciosSeleccionados, total, estado, notas);
@@ -337,33 +379,31 @@ function mostrarFormularioCrear(presupuesto = null) {
         listarPresupuestos();
     });
 
-  function calcularTotal() {
-    const salonId = parseInt(document.getElementById('salon').value);
-    const serviciosSeleccionados = Array.from(document.getElementById('servicios').selectedOptions).map(option => parseInt(option.value));
+    function calcularTotal() {
+        const salonId = parseInt(document.getElementById('salon').value);
+        const serviciosSeleccionados = Array.from(document.getElementById('servicios').selectedOptions).map(option => parseInt(option.value));
 
-    let totalSalon = 0;
-    let totalServicios = 0;
+        let totalSalon = 0;
+        let totalServicios = 0;
 
-    const salon = obtenerSalones().find(s => s.id === salonId);
-    if (salon) {
-        totalSalon = salon.precio;
+        const salon = obtenerSalones().find(s => s.id === salonId);
+        if (salon) {
+            totalSalon = salon.precio;
+        }
+
+        const servicios = obtenerServicios().filter(s => serviciosSeleccionados.includes(s.id));
+        totalServicios = servicios.reduce((acc, s) => acc + s.precio, 0);
+
+        const total = totalSalon + totalServicios;
+        document.getElementById('total').value = total.toFixed(2);
     }
 
-    const servicios = obtenerServicios().filter(s => serviciosSeleccionados.includes(s.id));
-    totalServicios = servicios.reduce((acc, s) => acc + s.precio, 0);
+    // Agregar eventos para actualizar el total
+    document.getElementById('salon').addEventListener('change', calcularTotal);
+    document.getElementById('servicios').addEventListener('change', calcularTotal);
 
-    const total = totalSalon + totalServicios;
-    document.getElementById('total').value = total.toFixed(2);
-  }
-
-  // Agregar eventos para actualizar el total automáticamente
-  document.getElementById('salon').addEventListener('change', calcularTotal);
-  document.getElementById('servicios').addEventListener('change', calcularTotal);
-
-  // Calcular total al cargar (si es creación, no edición)
-  if (!esEdicion) {
-      calcularTotal();
-  }
+    // Calcular total al cargar
+    calcularTotal();
 }
 
 function mostrarFormularioEditar(id) {
