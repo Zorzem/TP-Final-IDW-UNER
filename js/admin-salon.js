@@ -189,8 +189,8 @@ function mostrarFormularioCrear(salon = null) {
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
             <input type="number" step="0.01" class="form-control" id="precio" 
-                   value="${esEdicion ? salon.precio : ""}" required min="0.01">
-            <div class="invalid-feedback">Por favor ingresa el precio</div>
+                   value="${esEdicion ? salon.precio : ''}" required min="0.01">
+            <div class="invalid-feedback">Por favor ingresa un precio válido</div>
         </div>
 
         <div class="mb-3">
@@ -221,6 +221,10 @@ function mostrarFormularioCrear(salon = null) {
     const capacidad = document.getElementById("capacidad").value;
     const capacidad_num = parseInt(capacidad);
 
+    const id = document.getElementById("salon-id").value;
+    const precio = document.getElementById("precio").value;
+    const precio_num = parseInt(precio);
+
     // Validación para nombre (permite letras, números, espacios y acentos)
     const nombreRegex = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/;
     if (!nombreRegex.test(nombre)) {
@@ -240,9 +244,12 @@ function mostrarFormularioCrear(salon = null) {
       return;
     }
 
-    const id = document.getElementById("salon-id").value;
+    if (isNaN(precio_num) || precio_num < 0.01) {
+      mostrarMensaje("error", "El precio debe ser mayor a 0");
+      return;
+    }
 
-    const precio = document.getElementById("precio").value;
+
 
     if (esEdicion) {
       actualizarSalon(parseInt(id), nombre, capacidad, precio, imagen);
