@@ -189,7 +189,7 @@ function mostrarFormularioCrear(salon = null) {
         <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
             <input type="number" step="0.01" class="form-control" id="precio" 
-                   value="${esEdicion ? salon.precio : ""}" required min="0.01">
+                   value="${esEdicion ? salon.precio : ''}" required min="0.01">
             <div class="invalid-feedback">Por favor ingresa el precio</div>
         </div>
 
@@ -214,6 +214,12 @@ function mostrarFormularioCrear(salon = null) {
   // Evento de submit
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    if (!form.checkValidity()) {
+        e.stopPropagation();
+        form.classList.add('was-validated');
+        return;
+    }
 
     const nombre = document.getElementById("nombre").value.trim();
     const imagen = document.getElementById("imagen").value.trim();
