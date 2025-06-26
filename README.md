@@ -145,4 +145,6 @@ Esta etapa tiene como objetivo incorporar una **autenticación real vía API RES
   - **Presupuestos**
   - **Usuarios registrados (API pública)**
 
+- **Link video explicativo:** [Video](https://drive.google.com/file/d/1yntjEpOogRCu4fe91ZsRav604ftIleX5).
+
 ---
